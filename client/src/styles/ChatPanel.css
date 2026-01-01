@@ -1,3 +1,4 @@
 #chat-panel {
-  
+  display: grid;
+  grid-template-rows: 0.7fr 0.3fr;
 }

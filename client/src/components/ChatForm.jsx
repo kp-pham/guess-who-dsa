@@ -2,9 +2,9 @@ import '../styles/ChatForm.css'
 
 function ChatForm() {
   return (
-    <div id="chat-form">
+    <form id="chat-form">
       
-    </div>
+    </form>
   )
 }
 
