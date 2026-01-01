@@ -1,0 +1,14 @@
+import express from 'express'
+import { Server } from 'socket.io'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const PORT = process.env.port || 3500
+
+const app = express()
+
+const expressServer = app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`)
+})
+
+const io = new Server(expressServer)
