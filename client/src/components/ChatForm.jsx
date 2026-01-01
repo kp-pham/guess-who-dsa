@@ -1,16 +1,28 @@
+import { useState } from 'react'
 import '../styles/ChatForm.css'
 
 function ChatForm() {
+  const [text, setText] = useState("")
+
   function handleKeyDown(e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
-      document.querySelector('textarea').value = ''
+      setText("")
     }
+  }
+
+  function handleChange(e) {
+    setText(e.target.value)
   }
 
   return (
     <form id="chat-form">
-      <textarea onKeyDown={handleKeyDown} placeholder="Enter your message here..."></textarea>
+      <textarea 
+        value={text} 
+        onChange={handleChange} 
+        onKeyDown={handleKeyDown} 
+        placeholder="Enter your message here...">
+      </textarea>
     </form>
   )
 }
