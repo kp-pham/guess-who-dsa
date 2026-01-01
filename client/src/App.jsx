@@ -1,9 +1,11 @@
+import { Gameboard, ChatPanel } from './components'
 import './App.css'
 
 function App() {
   return (
     <>
-      Hello world!
+      <Gameboard></Gameboard>
+      <ChatPanel></ChatPanel>
     </>
   )
 }
