@@ -12,7 +12,16 @@ const app = express()
 app.use(express.static(path.join(__dirname, "../client/dist")))
 
 const expressServer = app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
+  console.log(`Server listening on port ${PORT}`)
 })
 
-const io = new Server(expressServer)
+const io = new Server(expressServer, {
+  cors: {
+    origin: ['http://localhost:5172', 'http://127.0.0.1:5173'],
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on('connection', socket => {
+  console.log(`User Connected: ${socket.id}`)
+})
