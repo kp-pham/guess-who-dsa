@@ -2,8 +2,10 @@ import '../styles/ChatForm.css'
 
 function ChatForm() {
   function handleKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey)
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
       document.querySelector('textarea').value = ''
+    }
   }
 
   return (
