@@ -1,9 +1,14 @@
 import '../styles/ChatForm.css'
 
 function ChatForm() {
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && !e.shiftKey)
+      document.querySelector('textarea').value = ''
+  }
+
   return (
     <form id="chat-form">
-      <textarea placeholder="Enter your message here..."></textarea>
+      <textarea onKeyDown={handleKeyDown} placeholder="Enter your message here..."></textarea>
     </form>
   )
 }
