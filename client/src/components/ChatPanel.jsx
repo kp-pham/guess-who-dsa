@@ -2,11 +2,11 @@ import ChatForm from './ChatForm.jsx'
 import ChatLog from './ChatLog.jsx'
 import '../styles/ChatPanel.css'
 
-function ChatPanel() {
+function ChatPanel({ socket }) {
   return (
     <div id="chat-panel">
       <ChatLog></ChatLog>
-      <ChatForm></ChatForm>
+      <ChatForm socket={socket}></ChatForm>
     </div>
   )
 }

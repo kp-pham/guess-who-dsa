@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import '../styles/ChatForm.css'
 
-function ChatForm() {
+function ChatForm({ socket }) {
   const [text, setText] = useState("")
 
   function handleKeyDown(e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       setText("")
+      socket.emit("send_message", text)
     }
   }
 

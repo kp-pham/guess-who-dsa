@@ -9,7 +9,7 @@ function App() {
       <Header></Header>
       <main>
         <Gameboard></Gameboard>
-        <ChatPanel></ChatPanel>
+        <ChatPanel socket={socket}></ChatPanel>
       </main>
     </>
   )
