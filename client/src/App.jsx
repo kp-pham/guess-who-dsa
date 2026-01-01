@@ -1,11 +1,14 @@
-import { Gameboard, ChatPanel } from './components'
+import { Gameboard, ChatPanel, Header } from './components'
 import './App.css'
 
 function App() {
   return (
     <>
-      <Gameboard></Gameboard>
-      <ChatPanel></ChatPanel>
+      <Header></Header>
+      <main>
+        <Gameboard></Gameboard>
+        <ChatPanel></ChatPanel>
+      </main>
     </>
   )
 }

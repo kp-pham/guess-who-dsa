@@ -1,5 +1,7 @@
+import '../styles/Gameboard.css'
+
 function Gameboard() {
-    return <div></div>
+    return <div id="gameboard"></div>
 }
 
 export default Gameboard

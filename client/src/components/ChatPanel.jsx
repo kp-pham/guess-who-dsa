@@ -1,5 +1,7 @@
+import '../styles/ChatPanel.css'
+
 function ChatPanel() {
-    return <div></div>
+    return <div id="chat-panel"></div>
 }
 
 export default ChatPanel
