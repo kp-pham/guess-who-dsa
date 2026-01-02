@@ -4,7 +4,6 @@ import Activity from './Activity.jsx'
 import ChatForm from './ChatForm.jsx'
 import ChatLog from './ChatLog.jsx'
 import '../styles/ChatPanel.css'
-  // const [activity, setActivity] = useState(false)
 
 function ChatPanel() {
   const timerRef = useRef(null)
@@ -12,17 +11,25 @@ function ChatPanel() {
   const socket = useSocket()
 
   useEffect(() => {
-    socket.on('activity', () => {
+    function handleActivity() {
       setActivity(true)
 
       if (timerRef.current)
-        clearTimeout(timerRef.current)
-      
+          clearTimeout(timerRef.current)
+
       timerRef.current = setTimeout(() => {
         setActivity(false)
       }, 7000)
+    }
+
+    socket.on('activity', handleActivity)  
       
-    })
+    return () => {
+      socket.off('activity', handleActivity)
+
+      if (timerRef.current)
+        clearTimeout(timerRef.current)
+    }
   }, [socket])
 
   return (
