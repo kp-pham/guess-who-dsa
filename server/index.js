@@ -32,4 +32,8 @@ io.on('connection', socket => {
   socket.on('activity', () => {
     socket.broadcast.emit('activity')
   })
+
+  socket.on('end_turn', () => {
+    socket.broadcast.emit('end_turn')
+  })
 })

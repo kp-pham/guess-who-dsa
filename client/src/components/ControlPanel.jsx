@@ -1,6 +1,6 @@
 import '../styles/ControlPanel.css'
 
-function ControlPanel({ turn, handleTurn }) {
+function ControlPanel({ turn, endTurn }) {
   return (
     <section id="control-panel">
       <div id="selected">Dijkstra's Algorithm</div>
@@ -9,14 +9,14 @@ function ControlPanel({ turn, handleTurn }) {
           id="guess"
           type="button"
           disabled={!turn}
-          onClick={handleTurn}>
+          onClick={endTurn}>
             Guess
         </button>
         <button 
           id="end-turn" 
           type="button"
           disabled={!turn}
-          onClick={handleTurn}>
+          onClick={endTurn}>
             End Turn
           </button>
       </div>
