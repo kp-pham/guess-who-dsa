@@ -3,8 +3,11 @@ import '../styles/ControlPanel.css'
 function ControlPanel() {
   return (
     <section id="control-panel">
-      <button>Guess</button>
-      <button>End Turn</button>
+      <div id="selected">Dijkstra's Algorithm</div>
+      <div>
+        <button id="guess" type="button">Guess</button>
+        <button id="end-turn" type="button">End Turn</button>
+      </div>
     </section>
   )
 }

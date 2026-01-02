@@ -1,4 +1,30 @@
 #control-panel {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  /* justify-content: center;
+  align-items: stretch; */
+  gap: 5px;
+  padding: 10px;
   background-color: #181818;
   border-top: 2px solid #4d5055;
+}
+
+#selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-column: span 1;
+  color: #ffffff;
+  background-color: #181818;
+  border: 2px solid #4d5055;
+  border-radius: 5px;
+}
+
+#guess,
+#end-turn {
+  color: #ffffff;
+  background-color: #181818;
+  padding: 10px;
+  /* border: 2px solid #4d5055; */
 }
