@@ -23,7 +23,9 @@ function Gameboard() {
         eliminated={eliminated} 
         onCardClick={handleClick}>
       </CardGrid>
-      <ControlPanel></ControlPanel>
+      <ControlPanel 
+        remaining={cards.filter(card => !eliminated.has(card))}>
+      </ControlPanel>
     </section>
   )
 }
