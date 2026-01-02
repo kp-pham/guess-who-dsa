@@ -9,6 +9,7 @@ function CardGrid({ cards, eliminated, onCardClick}) {
 
         return (
           <button
+            className="card"
             key={index} 
             type="button" 
             onClick={() => onCardClick(index)}

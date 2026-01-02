@@ -1,3 +1,5 @@
+import '../styles/ControlPanel.css'
+
 function ControlPanel() {
   return (
     <section id="control-panel">
