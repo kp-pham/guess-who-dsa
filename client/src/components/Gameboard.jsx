@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useSocket } from '../contexts/hooks.js'
+import { useState } from 'react'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import '../styles/Gameboard.css'
@@ -8,17 +7,6 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
-  const [turn, setTurn] = useState(true)
-  const socket = useSocket()
-
-  useEffect(() => {
-    function startTurn() {
-      setTurn(true)
-    }
-
-    socket.on('end_turn', startTurn)
-    return () => socket.off('end_turn', startTurn)
-  }, [socket])
 
   function handleClick(id) {
     setEliminated(previous => {
@@ -28,11 +16,6 @@ function Gameboard() {
     })
   }
 
-  function endTurn() {
-    setTurn(false)
-    socket.emit('end_turn')
-  }
-
   return (
     <section id="gameboard">
       <CardGrid 
@@ -40,10 +23,7 @@ function Gameboard() {
         eliminated={eliminated} 
         onCardClick={handleClick}>
       </CardGrid>
-      <ControlPanel
-        turn={turn}
-        endTurn={endTurn}>
-      </ControlPanel>
+      <ControlPanel></ControlPanel>
     </section>
   )
 }
