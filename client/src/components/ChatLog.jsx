@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSocket } from '../contexts/hooks.js'
 import Message from './Message.jsx'
 import '../styles/ChatLog.css'
 
 function ChatLog() {
   const [messages, setMessages] = useState([])
+  const messagesEndRef = useRef(null)
   const socket = useSocket()
 
   useEffect(() => {
@@ -16,9 +17,14 @@ function ChatLog() {
     return () => socket.off('message', handleMessage)
   }, [socket])
 
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
   return (
     <ul id="chat-log">
       {messages.map((message, index) => <Message key={index} content={message}></Message>)}
+      <li ref={messagesEndRef}></li>
     </ul>
   )
 }
