@@ -1,9 +1,8 @@
 import '../styles/Message.css'
 
-function Message() {
+function Message({ content }) {
   return (
-    <div>
-    </div>
+    <div>{content}</div>
   )
 }
 

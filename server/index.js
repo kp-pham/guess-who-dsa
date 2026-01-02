@@ -25,7 +25,7 @@ const io = new Server(expressServer, {
 io.on('connection', socket => {
   console.log(`User Connected: ${socket.id}`)
 
-  socket.on("send_message", data => {
-    console.log(data)
+  socket.on("message", data => {
+    io.emit('message', data)
   })
 })

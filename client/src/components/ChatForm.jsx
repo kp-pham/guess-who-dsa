@@ -10,7 +10,7 @@ function ChatForm() {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       setText("")
-      socket.emit("send_message", text)
+      socket.emit("message", text)
     }
   }
 
