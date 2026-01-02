@@ -1,6 +1,7 @@
-.activity {
+#activity {
   display: flex;
   align-items: center;
+  color: #FFFFFF;
   padding: 0 0 0 10px;
   border-radius: 10px 10px 0 0;
   background-color: #4d5055;
