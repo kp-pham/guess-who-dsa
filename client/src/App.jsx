@@ -1,16 +1,17 @@
 import { Gameboard, ChatPanel, Header } from './components'
-import io from 'socket.io-client'
-
-const socket = io('http://localhost:3500')
+import { SocketProvider } from './contexts'
 
 function App() {
   return (
     <>
-      <Header></Header>
-      <main>
-        <Gameboard></Gameboard>
-        <ChatPanel socket={socket}></ChatPanel>
-      </main>
+      <SocketProvider>
+        <Header></Header>
+        <main>
+          <Gameboard></Gameboard>
+          <ChatPanel></ChatPanel>
+        </main>
+      </SocketProvider>
+      
     </>
   )
 }
