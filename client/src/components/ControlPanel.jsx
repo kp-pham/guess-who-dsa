@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSocket } from '../contexts/hooks.js'
+import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
 function ControlPanel({ remaining }) {
   const [turn, setTurn] = useState(true)
-  const dialogRef = useRef(null)
+  const [open, setOpen] = useState(false)
   const socket = useSocket()
 
   useEffect(() => {
@@ -21,14 +22,6 @@ function ControlPanel({ remaining }) {
     socket.emit('end_turn')
   }
 
-  function showModal() {
-    dialogRef.current.openModal()
-  }
-
-  function closeModal() {
-    dialogRef.current.closeModal()
-  }
-
   return (
     <section id="control-panel">
       <div id="selected">Dijkstra's Algorithm</div>
@@ -37,7 +30,7 @@ function ControlPanel({ remaining }) {
           id="guess"
           type="button"
           disabled={!turn}
-          onClick={showModal}>
+          onClick={() => setOpen(true)}>
             Guess
         </button>
         <button 
@@ -48,20 +41,11 @@ function ControlPanel({ remaining }) {
             End Turn
           </button>
       </div>
-      <dialog ref={dialogRef} id="guess-modal">
-        <select>
-          <option value="" disabled>Select data structure or algorithm...</option>
-          {remaining.map((card, index) => {
-            return (
-              <option key={index} value={card}>
-                {card}
-              </option>
-            )
-          })}
-        </select>
-        <button onClick={closeModal} type="button">Cancel</button>
-        <button type="submit">Guess</button>
-      </dialog>
+      <GuessModal
+        open={open}
+        remaining={remaining}
+        onClose={() => setOpen(false)}>
+      </GuessModal>
     </section>
   )
 }
