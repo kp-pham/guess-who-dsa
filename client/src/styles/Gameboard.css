@@ -1,5 +1,5 @@
 #gameboard {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 0.75fr 0.25fr;
   border-right: 2px solid #4d5055;
 }
