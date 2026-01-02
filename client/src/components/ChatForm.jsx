@@ -7,10 +7,13 @@ function ChatForm() {
   const [text, setText] = useState("")
 
   function handleKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (pressedDownEnter(e) && !pressedDownShift(e)) {
       e.preventDefault()
-      setText("")
-      socket.emit("message", text)
+
+      if (!isWhitespace(e.target.value)) {
+        setText("")
+        socket.emit("message", text)
+      }
     }
   }
 
@@ -28,6 +31,18 @@ function ChatForm() {
       </textarea>
     </form>
   )
+}
+
+function pressedDownEnter(e) {
+  return e.key === "Enter"
+}
+
+function pressedDownShift(e) {
+  return e.shiftKey
+}
+
+function isWhitespace(text) {
+  return text.trim() === ""
 }
 
 export default ChatForm
