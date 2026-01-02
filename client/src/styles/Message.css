@@ -1,7 +1,9 @@
-.message {
-  color: white;
-  background-color: blue;
-  max-width: 60%;
-  padding: 5px;
-  border-radius: 5px;
+.message--left {
+  background-color: red;
+  justify-self: start;
+}
+
+.message--right {
+  background-color: black;
+  justify-self: end;
 }

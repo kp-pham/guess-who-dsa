@@ -12,7 +12,7 @@ function ChatForm() {
 
       if (!isWhitespace(e.target.value)) {
         setText("")
-        socket.emit("message", text)
+        socket.emit("message", { id: socket.id, text: text })
       }
     }
   }

@@ -2,7 +2,7 @@ import '../styles/Message.css'
 
 function Message({ content }) {
   return (
-    <li class="message">{content}</li>
+    <li className="message">{content}</li>
   )
 }
 
