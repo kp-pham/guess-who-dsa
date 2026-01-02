@@ -17,9 +17,9 @@ function ChatLog() {
   }, [socket])
 
   return (
-    <div id="chat-log">
+    <ul id="chat-log">
       {messages.map((message, index) => <Message key={index} content={message}></Message>)}
-    </div>
+    </ul>
   )
 }
 
