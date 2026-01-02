@@ -1,8 +1,7 @@
-import { createContext } from 'react'
+import { SocketContext } from './useSocket.js'
 import io from 'socket.io-client'
 
 const socket = io('http://localhost:3500')
-const SocketContext = createContext()
 
 function SocketProvider({ children }) {
   return (
@@ -12,4 +11,4 @@ function SocketProvider({ children }) {
   )
 }
 
-export { SocketContext, SocketProvider }
+export default SocketProvider

@@ -1,3 +1,3 @@
-import { SocketContext, SocketProvider } from './SocketContext.jsx'
+import SocketProvider from './SocketContext'
 
-export { SocketContext, SocketProvider }
+export { SocketProvider }

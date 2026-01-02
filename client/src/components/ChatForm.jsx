@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react'
-import { SocketContext } from '../contexts'
+import { useState } from 'react'
+import { useSocket } from '../contexts/SocketContext/useSocket.js'
 import '../styles/ChatForm.css'
 
 function ChatForm() {
-  const socket = useContext(SocketContext)
+  const socket = useSocket()
   const [text, setText] = useState("")
 
   function handleKeyDown(e) {
