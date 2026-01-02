@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSocket } from '../contexts/SocketContext/useSocket.js'
+import { useSocket } from '../contexts/hooks.js'
 import '../styles/ChatForm.css'
 
 function ChatForm() {
