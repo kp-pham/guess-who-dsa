@@ -32,6 +32,16 @@ function ChatPanel() {
     }
   }, [socket])
 
+  useEffect(() => {
+    function handleMessage() {
+      setActivity(false)
+    }
+
+    socket.on('message', handleMessage)
+
+    return () => socket.off('message', handleMessage)
+  })
+
   return (
     <div id="chat-panel">
       <ChatLog></ChatLog>
