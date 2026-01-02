@@ -14,3 +14,7 @@ main {
   display: grid;
   grid-template-columns: 3fr 2fr;
 }
+
+ul {
+  list-style: none;
+}
