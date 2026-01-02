@@ -8,10 +8,12 @@ function ChatLog() {
   const socket = useSocket()
 
   useEffect(() => {
-    socket.on('message', data => {
+    function handleMessage(data) {
       setMessages(current => [...current, data])
-      console.log("Received: ", data)
-    })
+    }
+    
+    socket.on('message', handleMessage)
+    return () => socket.off('message', handleMessage)
   }, [socket])
 
   return (
