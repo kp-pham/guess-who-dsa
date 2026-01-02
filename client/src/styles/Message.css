@@ -1,9 +1,0 @@
-.message--left {
-  background-color: red;
-  justify-self: start;
-}
-
-.message--right {
-  background-color: black;
-  justify-self: end;
-}

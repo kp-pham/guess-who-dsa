@@ -9,19 +9,18 @@
 
 .message--left,
 .message--right {
+  max-width: 60%;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
 .message--left {
-  max-width: 60%;
   background-color: red;
   align-self: flex-start;
 }
 
 .message--right {
-  max-width: 60%;
   background-color: black;
   align-self: flex-end;
 }
