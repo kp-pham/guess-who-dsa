@@ -7,6 +7,7 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
+  const [turn, setTurn] = useState(true)
 
   function handleClick(id) {
     setEliminated(previous => {
@@ -16,6 +17,10 @@ function Gameboard() {
     })
   }
 
+  function handleTurn() {
+    setTurn(false)
+  }
+
   return (
     <section id="gameboard">
       <CardGrid 
@@ -23,7 +28,10 @@ function Gameboard() {
         eliminated={eliminated} 
         onCardClick={handleClick}>
       </CardGrid>
-      <ControlPanel></ControlPanel>
+      <ControlPanel
+        turn={turn}
+        handleTurn={handleTurn}>
+      </ControlPanel>
     </section>
   )
 }
