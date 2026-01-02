@@ -5,14 +5,14 @@ function CardGrid({ cards, eliminated, onCardClick}) {
   return (
     <section id="card-grid">
       {cards.map((card, index) => {
-        const isEliminated = eliminated.has(index)
+        const isEliminated = eliminated.has(card)
 
         return (
           <button
             className="card"
             key={index} 
             type="button" 
-            onClick={() => onCardClick(index)}
+            onClick={() => onCardClick(card)}
             style={{
               opacity: isEliminated ? 0.4 : 1,
               filter: isEliminated ? "grayscale(100%)" : "none"

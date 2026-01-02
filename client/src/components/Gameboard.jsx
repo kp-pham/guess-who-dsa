@@ -8,10 +8,10 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
 
-  function handleClick(id) {
+  function handleClick(card) {
     setEliminated(previous => {
       const current = new Set(previous)
-      current.has(id) ? current.delete(id) : current.add(id)
+      current.has(card) ? current.delete(card) : current.add(card)
       return current
     })
   }

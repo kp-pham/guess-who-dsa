@@ -32,7 +32,6 @@ function ChatLog() {
           </li>
         )
       })}
-      {/* {messages.map((message, index) => <Message key={index} content={message}></Message>)} */}
       <li ref={messagesEndRef}></li>
     </ul>
   )
