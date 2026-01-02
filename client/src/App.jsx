@@ -5,7 +5,6 @@ function App() {
   return (
     <>
       <SocketProvider>
-        <Header></Header>
         <main>
           <Gameboard></Gameboard>
           <ChatPanel></ChatPanel>
