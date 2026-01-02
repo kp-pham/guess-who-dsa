@@ -1,11 +1,20 @@
 import '../styles/CardGrid.css'
 
-const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary Search Trees', 'Red-Black Trees', 'Preorder Traversal', 'Inorder Traversal', 'Postorder Traversal', 'Level-order Traversal', 'Skip Lists', 'Graphs', 'Dijkstra\'s Algorithm', 'Topological Sort', 'Insertion Sort', 'Selection Sort', 'Treesort', 'Heapsort', 'Quicksort', 'Merge Sort', 'Counting Sort', 'Radix Sort', 'Union-Find']
 
-function CardGrid() {
+function CardGrid({ cards, eliminated, onCardClick}) {
   return (
     <section id="card-grid">
-      {cards.map((card, index) => <button key={index} type="button">{card}</button>)}
+      {cards.map((card, index) => {
+        return (
+          <button 
+            key={index} 
+            type="button" 
+            onClick={() => onCardClick(index)}
+            disabled={eliminated.has(index)}>
+              {card}
+          </button>
+        )
+      })}
     </section>
   )
 }
