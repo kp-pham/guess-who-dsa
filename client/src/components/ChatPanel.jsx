@@ -13,7 +13,6 @@ function ChatPanel() {
 
   useEffect(() => {
     socket.on('activity', () => {
-      console.log('hi')
       setActivity(true)
 
       if (timerRef.current)
@@ -29,7 +28,7 @@ function ChatPanel() {
   return (
     <div id="chat-panel">
       <ChatLog></ChatLog>
-      {activity && <Activity></Activity>}
+      <Activity activity={activity}></Activity>
       <ChatForm></ChatForm>
     </div>
   )

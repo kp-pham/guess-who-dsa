@@ -1,8 +1,13 @@
 import '../styles/Activity.css'
 
-function Activity() {
+function Activity({ activity }) {
   return (
-    <div className="activity">Opponent is typing...</div>
+    <div 
+      style={{ visibility: activity ? "visible" : "hidden" }}
+      className="activity"
+    >
+      Opponent is typing...
+    </div>
   )
 }
 
