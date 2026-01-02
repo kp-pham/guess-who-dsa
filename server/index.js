@@ -25,7 +25,11 @@ const io = new Server(expressServer, {
 io.on('connection', socket => {
   console.log(`User Connected: ${socket.id}`)
 
-  socket.on("message", data => {
+  socket.on('message', data => {
     io.emit('message', data)
+  })
+
+  socket.on('activity', () => {
+    socket.broadcast.emit('activity')
   })
 })
