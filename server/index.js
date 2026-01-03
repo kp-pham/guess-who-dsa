@@ -85,34 +85,20 @@ io.on('connection', socket => {
     
     if (!room) return
 
-    const selected = rooms[room][socket.id].selected
     const opponentId = Object.keys(rooms[room]).find(id => id !== socket.id)
     const opponentSelected = rooms[room][opponentId].selected
 
-    if (guess === opponentSelected)
-      io.to(room).emit('correct_guess', { selected: selected, opponentSelected: opponentSelected })
+    if (guess === opponentSelected) {
+      const selected = rooms[room][socket.id].selected
+      const message = { selected: selected, opponentSelected: opponentSelected }
 
-    else
+      socket.emit('game_won', message)
+      socket.broadcast.to(room).emit('game_lost', message)
+    }
+    else {
       socket.emit('incorrect_guess')
-    // if (room) {
-    //   socket.broadcast.to(room).emit('guess', guess)
-    //   socket.broadcast.to(room).emit('end_turn')
-    // }
+    }
   })
-
-  // socket.on('correct_guess', data => {
-  //   const room = data.room
-
-  //   if (room)
-  //     socket.broadcast.to(room).emit('correct_guess')
-  // })
-
-  // socket.on('incorrect_guess', data => {
-  //   const room = data.room
-
-  //   if (room)
-  //     socket.broadcast.to(room).emit('incorrect_guess')
-  // })
 
   socket.on('disconnect', () => {
     // Handle when one player disconnects

@@ -33,13 +33,23 @@ function Gameboard() {
   }
 
   useEffect(() => {
-    function handleCorrectGuess() {
+    function handleGameWon() {
       setGameOver(true)
       setWinner(true)
     }
 
-    socket.on('correct_guess', handleCorrectGuess)
-    return () => socket.off('correct_guess', handleCorrectGuess)
+    socket.on('game_won', handleGameWon)
+    return () => socket.off('game_won', handleGameWon)
+  })
+
+  useEffect(() => {
+    function handleGameLost() {
+      setGameOver(true)
+      setWinner(false)
+    }
+
+    socket.on('game_lost', handleGameLost)
+    return () => socket.off('game_lost', handleGameLost)
   })
 
   useEffect(() => {
