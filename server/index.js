@@ -40,8 +40,8 @@ function startGame(player1, player2) {
   player2.join(room)
 
   rooms[room] = { 
-    player1: { id: player1.id, selected: null },
-    player2: { id: player2.id, selected: null }
+    [player1.id]: { selected: null },
+    [player2.id]: { selected: null }
   }
 
   io.to(room).emit('matched', room)
@@ -51,6 +51,15 @@ io.on('connection', socket => {
   console.log(`User Connected: ${socket.id}`)
   queue.push(socket)
   match()
+
+  socket.on('start_game', data => {
+    const { selected, room } = data
+
+    if (room)
+      rooms[room][socket.id].selected = selected
+
+    console.log(rooms[room])
+  })
 
   socket.on('message', data => {
     const room = data.room

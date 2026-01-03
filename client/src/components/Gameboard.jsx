@@ -20,6 +20,10 @@ function Gameboard() {
     return cards[index]
   }, [])
 
+  useEffect(() => {
+    socket.emit('start_game', { selected: selectedCard, room: room })
+  }, [socket, selectedCard, room])
+
   function handleClick(card) {
     setEliminated(previous => {
       const current = new Set(previous)
