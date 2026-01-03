@@ -38,6 +38,16 @@ function Gameboard() {
     })
   }
 
+  useEffect(() => {
+    function handleGuess(guess) {
+      if (guess == selectedCard)
+        console.log("Winner Winner Chicken Dinner")
+    }
+
+    socket.on('guess', handleGuess)
+    return () => socket.off('guess', handleGuess)
+  }, [socket, selectedCard])
+
   return (
     <section id="gameboard">
       <CardGrid 
