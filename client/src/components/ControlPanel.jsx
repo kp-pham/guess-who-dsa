@@ -6,7 +6,7 @@ import '../styles/ControlPanel.css'
 function ControlPanel({ selected, remaining }) {
   const [open, setOpen] = useState(false)
   const [turn, setTurn] = useState(true)
-  const { socket } = useSocketContext()
+  const { socket, room } = useSocketContext()
 
   useEffect(() => {
     function startTurn() {
@@ -19,7 +19,7 @@ function ControlPanel({ selected, remaining }) {
   
   function endTurn() {
     setTurn(false)
-    socket.emit('end_turn')
+    socket.emit('end_turn', { room: room })
   }
   
   return (

@@ -60,8 +60,11 @@ io.on('connection', socket => {
       socket.broadcast.to(room).emit('activity')
   })
 
-  socket.on('end_turn', () => {
-    socket.broadcast.emit('end_turn')
+  socket.on('end_turn', data => {
+    const room = data.room
+
+    if (room)
+      socket.broadcast.to(room).emit('end_turn')
   })
 
   socket.on('guess', data => {
