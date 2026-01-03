@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
+import { useSocket } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import '../styles/Gameboard.css'
@@ -7,11 +8,27 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
+  const [turn, setTurn] = useState(true)
+  const socket = useSocket()
 
   const selectedCard = useMemo(() => {
     const index = Math.floor(Math.random() * cards.length)
     return cards[index]
   }, [])
+
+  useEffect(() => {
+    function startTurn() {
+      setTurn(true)
+    }
+
+    socket.on('end_turn', startTurn)
+    return () => socket.off('end_turn', startTurn)
+  }, [socket])
+
+  function endTurn() {
+    setTurn(false)
+    socket.emit('end_turn')
+  }
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -29,6 +46,8 @@ function Gameboard() {
         onCardClick={handleClick}>
       </CardGrid>
       <ControlPanel
+        turn={turn}
+        endTurn={endTurn}
         selected={selectedCard}
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
