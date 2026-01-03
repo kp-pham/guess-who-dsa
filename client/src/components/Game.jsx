@@ -3,7 +3,7 @@ import Gameboard from './Gameboard.jsx'
 
 function Game() {
   return (
-    <main>
+    <main id="game">
       <Gameboard></Gameboard>
       <ChatPanel></ChatPanel>
     </main>

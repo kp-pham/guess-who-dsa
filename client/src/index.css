@@ -12,12 +12,6 @@ body {
   height: 100vh;
 }
 
-main {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  height: 100%;
-}
-
 ul {
   list-style: none;
 }

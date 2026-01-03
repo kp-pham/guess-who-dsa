@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <SocketProvider>
-        {matched ? <Game></Game> : <Lobby></Lobby> }
+        {matched ? <Game></Game> : <Lobby onMatched={() => setMatched(true)}></Lobby> }
       </SocketProvider>
       
     </>
