@@ -1,16 +1,12 @@
-import { useState } from 'react'
 import { Game, Lobby } from './components'
-import { SocketProvider } from './contexts'
+import { useSocket } from './contexts/hooks.js'
 
 function App() {
-  const [matched, setMatched] = useState(false)
-
+  const { matched } = useSocket()
+  console.log(matched)
   return (
     <>
-      <SocketProvider>
-        {matched ? <Game></Game> : <Lobby onMatched={() => setMatched(true)}></Lobby> }
-      </SocketProvider>
-      
+      {matched ? <Game></Game> : <Lobby></Lobby> }      
     </>
   )
 }

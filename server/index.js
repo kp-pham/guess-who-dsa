@@ -38,7 +38,7 @@ function startGame(player1, player2) {
   player1.join(room)
   player2.join(room)
 
-  io.to(room).emit('matched')
+  io.to(room).emit('matched', room)
 }
 
 io.on('connection', socket => {
