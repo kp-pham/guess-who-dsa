@@ -1,5 +1,37 @@
 @import url("./Modal.css");
 
 #game-over {
-  
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 0.25fr 0.75fr;
+}
+
+/* #outcome {
+  text-align: center;
+} */
+
+#hand {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+#player,
+#opponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #4d5055;
+  border-radius: 5px;
+}
+
+#player {
+  background-color: black;
+  grid-column-start: 2;
+}
+
+#opponent {
+  background-color: red;
+  grid-column-start: 3;
 }

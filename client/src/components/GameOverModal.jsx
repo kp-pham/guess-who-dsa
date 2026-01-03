@@ -8,9 +8,16 @@ function GameOverModal({ gameOver, winner, onClose }) {
     <>
       <div className="overlay"></div>
       <div class="modal" id="game-over">
-        <p>{winner ? "You won!" : "You lost!"}</p>
-        <p>You selected: </p>
-        <p>Your opponent selected: </p>
+        <div id="outcome">
+          <p style={{textAlign: "center"}}>{winner ? "You won!" : "You lost!"}</p>
+          <p>You selected: Stacks</p>
+          <p>Your opponent selected: Topological Sort</p>
+        </div>
+       
+        <div id="hand">
+          <div id="player">Stacks</div>
+          <div id="opponent">Topological Sort</div>
+        </div>
       </div>
     </>,
     document.getElementById('portal')
