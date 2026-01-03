@@ -21,7 +21,7 @@ function Gameboard() {
   }, [])
 
   useEffect(() => {
-    socket.emit('start_game', { selected: selectedCard, room: room })
+    socket.emit('ready', { selected: selectedCard, room: room })
   }, [socket, selectedCard, room])
 
   function handleClick(card) {
