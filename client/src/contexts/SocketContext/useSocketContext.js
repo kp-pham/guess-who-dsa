@@ -2,13 +2,13 @@ import { createContext, useContext } from 'react'
 
 const SocketContext = createContext(null)
 
-function useSocket() {
+function useSocketContext() {
   const context = useContext(SocketContext)
 
   if (!context)
-    throw new Error('useSocket must be used within SocketProvider')
+    throw new Error('useSocketContext must be used within SocketProvider')
 
   return context
 }
 
-export { SocketContext, useSocket }
+export { SocketContext, useSocketContext }

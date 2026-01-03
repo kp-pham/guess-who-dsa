@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react'
-import { useSocket } from '../contexts/hooks.js'
+import { useSocketContext } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import GameOverModal from './GameOverModal.jsx'
@@ -13,7 +13,7 @@ function Gameboard() {
   const [incorrectGuess, setIncorrectGuess] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [winner, setWinner] = useState(false)
-  const socket = useSocket()
+  const { socket } = useSocketContext()
 
   const selectedCard = useMemo(() => {
     const index = Math.floor(Math.random() * cards.length)

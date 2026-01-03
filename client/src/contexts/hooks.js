@@ -1,3 +1,3 @@
-import { useSocket } from './SocketContext/useSocket.js'
+import { useSocketContext } from './SocketContext/useSocketContext.js'
 
-export { useSocket }
+export { useSocketContext }

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useSocket } from '../contexts/hooks.js'
+import { useSocketContext } from '../contexts/hooks.js'
 import '../styles/GuessModal.css'
 
 function GuessModal({ open, remaining, onClose, onGuess }) {
   const [guess, setGuess] = useState('')
-  const socket = useSocket()
+  const socket = useSocketContext()
 
   function handleChange(e) {
     setGuess(e.target.value)

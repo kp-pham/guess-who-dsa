@@ -1,9 +1,9 @@
 import { Game, Lobby } from './components'
-import { useSocket } from './contexts/hooks.js'
+import { useSocketContext } from './contexts/hooks.js'
 
 function App() {
-  const { matched } = useSocket()
-  console.log(matched)
+  const { matched } = useSocketContext()
+  
   return (
     <>
       {matched ? <Game></Game> : <Lobby></Lobby> }      

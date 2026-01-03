@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useSocket } from '../contexts/hooks.js'
+import { useSocketContext } from '../contexts/hooks.js'
 import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
 function ControlPanel({ selected, remaining }) {
   const [open, setOpen] = useState(false)
   const [turn, setTurn] = useState(true)
-  const socket = useSocket()
+  const { socket } = useSocketContext()
 
   useEffect(() => {
     function startTurn() {
