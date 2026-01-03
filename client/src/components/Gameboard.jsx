@@ -31,7 +31,8 @@ function Gameboard() {
   useEffect(() => {
     function handleGuess(guess) {
       if (guess == selectedCard) {
-        console.log("Display modal for loser")
+        setGameOver(true)
+        setWinner(false)
         socket.emit('correct_guess')
       }
       else {
@@ -45,7 +46,8 @@ function Gameboard() {
 
   useEffect(() => {
     function handleCorrectGuess() {
-      console.log("Display modal for winner")
+      setGameOver(true)
+      setWinner(true)
     }
 
     socket.on('correct_guess', handleCorrectGuess)
@@ -73,7 +75,8 @@ function Gameboard() {
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
       <GameOverModal
-        open={gameOver}
+        gameOver={gameOver}
+        winner={winner}
         onClose={() => setGameOver(false)}>
       </GameOverModal>
       <IncorrectGuessModal
