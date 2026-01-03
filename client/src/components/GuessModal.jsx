@@ -23,7 +23,7 @@ function GuessModal({ open, remaining, onClose, onGuess }) {
   return createPortal(
     <>
       <div className="overlay"></div>
-      <form id="guess-modal" onSubmit={handleGuess}>
+      <form className="modal" id="guess" onSubmit={handleGuess}>
         <label htmlFor="select-guess">Select data structure or algorithm...</label>
         <select 
           id="select-guess"

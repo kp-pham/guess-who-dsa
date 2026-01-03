@@ -1,30 +1,9 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-}
+@import url("./Modal.css");
 
-#guess-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
+#guess {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: #FFFFFF;
-  background-color: #181818;
-  padding: 10px;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
-  width: clamp(280px, 90vw, 480px);
-  min-height: 240px;
-  max-height: 80vh;
 }
 
 #cancel,

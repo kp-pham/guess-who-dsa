@@ -54,7 +54,7 @@ function Gameboard() {
 
   useEffect(() => {
     function handleIncorrectGuess() {
-      console.log("Display modal for incorrect guess")
+      setIncorrectGuess(true)
     }
     
     socket.on('incorrect_guess', handleIncorrectGuess)

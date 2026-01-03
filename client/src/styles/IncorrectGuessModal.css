@@ -1,0 +1,22 @@
+@import url("./Modal.css");
+
+#incorrect-guess {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#incorrect-icon {
+  width: 100px;
+  aspect-ratio: 1 / 1;
+}
+
+#close {
+  color: #ffffff;
+  background-color: #181818;
+  border: 2px solid #4d5055;
+  padding: 5px;
+  border-radius: 5px;
+}
