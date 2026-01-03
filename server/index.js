@@ -76,12 +76,18 @@ io.on('connection', socket => {
     }
   })
 
-  socket.on('correct_guess', () => {
-    socket.broadcast.emit('correct_guess')
+  socket.on('correct_guess', data => {
+    const room = data.room
+
+    if (room)
+      socket.broadcast.to(room).emit('correct_guess')
   })
 
-  socket.on('incorrect_guess', () => {
-    socket.broadcast.emit('incorrect_guess')
+  socket.on('incorrect_guess', data => {
+    const room = data.room
+
+    if (room)
+      socket.broadcast.to(room).emit('incorrect_guess')
   })
 
   socket.on('disconnect', () => {

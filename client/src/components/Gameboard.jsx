@@ -13,7 +13,7 @@ function Gameboard() {
   const [incorrectGuess, setIncorrectGuess] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [winner, setWinner] = useState(false)
-  const { socket } = useSocketContext()
+  const { socket, room } = useSocketContext()
 
   const selectedCard = useMemo(() => {
     const index = Math.floor(Math.random() * cards.length)
@@ -33,16 +33,16 @@ function Gameboard() {
       if (guess == selectedCard) {
         setGameOver(true)
         setWinner(false)
-        socket.emit('correct_guess')
+        socket.emit('correct_guess', { room: room })
       }
       else {
-        socket.emit('incorrect_guess')
+        socket.emit('incorrect_guess', { room: room })
       }
     }
 
     socket.on('guess', handleGuess)
     return () => socket.off('guess', handleGuess)
-  }, [socket, selectedCard])
+  }, [socket, selectedCard, room])
 
   useEffect(() => {
     function handleCorrectGuess() {
