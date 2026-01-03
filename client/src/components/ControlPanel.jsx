@@ -3,7 +3,7 @@ import { useSocket } from '../contexts/hooks.js'
 import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
-function ControlPanel({ remaining }) {
+function ControlPanel({ selected, remaining }) {
   const [turn, setTurn] = useState(true)
   const [open, setOpen] = useState(false)
   const socket = useSocket()
@@ -24,7 +24,7 @@ function ControlPanel({ remaining }) {
 
   return (
     <section id="control-panel">
-      <div id="selected">Dijkstra's Algorithm</div>
+      <div id="selected">{selected}</div>
       <div>
         <button 
           id="guess"

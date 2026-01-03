@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import '../styles/Gameboard.css'
@@ -7,6 +7,11 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
+
+  const selectedCard = useMemo(() => {
+    const index = Math.floor(Math.random() * cards.length)
+    return cards[index]
+  }, [])
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -23,7 +28,8 @@ function Gameboard() {
         eliminated={eliminated} 
         onCardClick={handleClick}>
       </CardGrid>
-      <ControlPanel 
+      <ControlPanel
+        selected={selectedCard}
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
     </section>
