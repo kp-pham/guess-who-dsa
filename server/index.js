@@ -2,6 +2,7 @@ import express from 'express'
 import { Server } from 'socket.io'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import crypto from 'crypto'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -22,8 +23,28 @@ const io = new Server(expressServer, {
   }
 });
 
+const queue = []
+
+function match() {
+  while (queue.length >= 2) {
+    const player1 = queue.shift()
+    const player2 = queue.shift()
+    startGame(player1, player2)
+  }
+}
+
+function startGame(player1, player2) {
+  const room = crypto.randomUUID()
+  player1.join(room)
+  player2.join(room)
+
+  io.to(room).emit('matched')
+}
+
 io.on('connection', socket => {
   console.log(`User Connected: ${socket.id}`)
+  queue.push(socket)
+  match()
 
   socket.on('message', data => {
     io.emit('message', data)
@@ -48,5 +69,10 @@ io.on('connection', socket => {
 
   socket.on('incorrect_guess', () => {
     socket.broadcast.emit('incorrect_guess')
+  })
+
+  socket.on('disconnect', () => {
+    const index = queue.indexOf(socket)
+    if (index !== -1) queue.splice(index, 1)
   })
 })
