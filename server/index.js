@@ -24,6 +24,7 @@ const io = new Server(expressServer, {
 });
 
 const queue = []
+const rooms = {}
 
 function match() {
   while (queue.length >= 2) {
@@ -37,6 +38,11 @@ function startGame(player1, player2) {
   const room = crypto.randomUUID()
   player1.join(room)
   player2.join(room)
+
+  rooms[room] = { 
+    player1: { id: player1.id, selected: null },
+    player2: { id: player2.id, selected: null }
+  }
 
   io.to(room).emit('matched', room)
 }
@@ -91,6 +97,8 @@ io.on('connection', socket => {
   })
 
   socket.on('disconnect', () => {
+    // Handle when one player disconnects
+
     const index = queue.indexOf(socket)
     if (index !== -1) queue.splice(index, 1)
   })
