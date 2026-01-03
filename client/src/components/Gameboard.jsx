@@ -2,12 +2,14 @@ import { useEffect, useState, useMemo } from 'react'
 import { useSocket } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
+import GameOverModal from './GameOverModal.jsx'
 import '../styles/Gameboard.css'
 
 const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary Search Trees', 'Red-Black Trees', 'Preorder Traversal', 'Inorder Traversal', 'Postorder Traversal', 'Level-order Traversal', 'Skip Lists', 'Graphs', 'Dijkstra\'s Algorithm', 'Topological Sort', 'Insertion Sort', 'Selection Sort', 'Treesort', 'Heapsort', 'Quicksort', 'Merge Sort', 'Counting Sort', 'Radix Sort', 'Union-Find']
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
+  const [open, setOpen] = useState(false)
   const socket = useSocket()
 
   const selectedCard = useMemo(() => {
@@ -44,6 +46,10 @@ function Gameboard() {
         selected={selectedCard}
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
+      <GameOverModal
+        open={open}
+        onClose={() => setOpen(false)}>
+      </GameOverModal>
     </section>
   )
 }
