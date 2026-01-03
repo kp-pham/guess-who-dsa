@@ -27,13 +27,36 @@ function Gameboard() {
 
   useEffect(() => {
     function handleGuess(guess) {
-      if (guess == selectedCard)
-        console.log("Winner Winner Chicken Dinner")
+      if (guess == selectedCard) {
+        console.log("Display modal for loser")
+        socket.emit('correct_guess')
+      }
+      else {
+        socket.emit('incorrect_guess')
+      }
     }
 
     socket.on('guess', handleGuess)
     return () => socket.off('guess', handleGuess)
   }, [socket, selectedCard])
+
+  useEffect(() => {
+    function handleCorrectGuess() {
+      console.log("Display modal for winner")
+    }
+
+    socket.on('correct_guess', handleCorrectGuess)
+    return () => socket.off('correct_guess', handleCorrectGuess)
+  })
+
+  useEffect(() => {
+    function handleIncorrectGuess() {
+      console.log("Display modal for incorrect guess")
+    }
+    
+    socket.on('incorrect_guess', handleIncorrectGuess)
+    return () => socket.off('incorrect_guess', handleIncorrectGuess)
+  })
 
   return (
     <section id="gameboard">
