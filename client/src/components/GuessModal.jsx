@@ -5,7 +5,7 @@ import '../styles/GuessModal.css'
 
 function GuessModal({ open, remaining, onClose, onGuess }) {
   const [guess, setGuess] = useState('')
-  const socket = useSocketContext()
+  const { socket, room } = useSocketContext()
 
   function handleChange(e) {
     setGuess(e.target.value)
@@ -15,7 +15,7 @@ function GuessModal({ open, remaining, onClose, onGuess }) {
     e.preventDefault()
     onGuess()
     onClose()
-    socket.emit('guess', guess)
+    socket.emit('guess', { guess: guess, room: room })
   }
 
   if (!open) return null
