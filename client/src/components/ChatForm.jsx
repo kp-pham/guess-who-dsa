@@ -18,7 +18,7 @@ function ChatForm() {
   }
 
   function handleChange(e) {
-    socket.emit('activity')
+    socket.emit('activity', { room: room })
     setText(e.target.value)
   }
 

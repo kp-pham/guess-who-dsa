@@ -53,8 +53,11 @@ io.on('connection', socket => {
       io.to(room).emit('message', data)
   })
 
-  socket.on('activity', () => {
-    socket.broadcast.emit('activity')
+  socket.on('activity', data => {
+    const room = data.room
+
+    if (room)
+      socket.broadcast.to(room).emit('activity')
   })
 
   socket.on('end_turn', () => {
