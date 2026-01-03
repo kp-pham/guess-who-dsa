@@ -14,6 +14,7 @@ function GuessModal({ open, remaining, onClose, onGuess }) {
   function handleGuess(e) {
     e.preventDefault()
     onGuess()
+    onClose()
     socket.emit('guess', guess)
   }
 
