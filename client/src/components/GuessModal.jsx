@@ -16,6 +16,7 @@ function GuessModal({ open, remaining, onClose, onGuess }) {
     onGuess()
     onClose()
     socket.emit('guess', { guess: guess, room: room })
+    socket.emit('end-turn', { room: room })
   }
 
   if (!open) return null

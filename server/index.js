@@ -43,9 +43,12 @@ function startGame(player1, player2) {
   player1.join(room)
   player2.join(room)
 
-  rooms[room] = { 
-    [player1.id]: { selected: null },
-    [player2.id]: { selected: null }
+  rooms[room] = {
+    players: {
+      [player1.id]: { selected: null },
+      [player2.id]: { selected: null }
+    }, 
+    player1Turn: true
   }
 
   io.to(room).emit('matched', room)
@@ -55,11 +58,13 @@ io.on('connection', socket => {
   queue.push(socket.id)
   match()
 
-  socket.on('start_game', data => {
+  socket.on('ready', data => {
     const { selected, room } = data
 
-    if (room)
-      rooms[room][socket.id].selected = selected
+    if (room) {
+      rooms[room].players[socket.id].selected = selected
+      socket.emit('start_game', { })
+    }
   })
 
   socket.on('message', data => {
@@ -88,11 +93,11 @@ io.on('connection', socket => {
     
     if (!room) return
 
-    const opponentId = Object.keys(rooms[room]).find(id => id !== socket.id)
-    const opponentSelected = rooms[room][opponentId].selected
+    const opponentId = Object.keys(rooms[room].players).find(id => id !== socket.id)
+    const opponentSelected = rooms[room].players[opponentId].selected
 
     if (guess === opponentSelected) {
-      const selected = rooms[room][socket.id].selected
+      const selected = rooms[room].players[socket.id].selected
       const message = { selected: selected, opponentSelected: opponentSelected }
 
       socket.emit('game_won', message)
@@ -100,6 +105,7 @@ io.on('connection', socket => {
     }
     else {
       socket.emit('incorrect_guess')
+      socket.broadcast.to(room).emit('end_turn')
     }
   })
 
