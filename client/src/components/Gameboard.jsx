@@ -33,22 +33,6 @@ function Gameboard() {
   }
 
   useEffect(() => {
-    function handleGuess(guess) {
-      if (guess == selectedCard) {
-        setGameOver(true)
-        setWinner(false)
-        socket.emit('correct_guess', { room: room })
-      }
-      else {
-        socket.emit('incorrect_guess', { room: room })
-      }
-    }
-
-    socket.on('guess', handleGuess)
-    return () => socket.off('guess', handleGuess)
-  }, [socket, selectedCard, room])
-
-  useEffect(() => {
     function handleCorrectGuess() {
       setGameOver(true)
       setWinner(true)

@@ -57,8 +57,6 @@ io.on('connection', socket => {
 
     if (room)
       rooms[room][socket.id].selected = selected
-
-    console.log(rooms[room])
   })
 
   socket.on('message', data => {
@@ -84,26 +82,37 @@ io.on('connection', socket => {
 
   socket.on('guess', data => {
     const { room, guess } = data
+    
+    if (!room) return
 
-    if (room) {
-      socket.broadcast.to(room).emit('guess', guess)
-      socket.broadcast.to(room).emit('end_turn')
-    }
+    const selected = rooms[room][socket.id].selected
+    const opponentId = Object.keys(rooms[room]).find(id => id !== socket.id)
+    const opponentSelected = rooms[room][opponentId].selected
+
+    if (guess === opponentSelected)
+      io.to(room).emit('correct_guess', { selected: selected, opponentSelected: opponentSelected })
+
+    else
+      socket.emit('incorrect_guess')
+    // if (room) {
+    //   socket.broadcast.to(room).emit('guess', guess)
+    //   socket.broadcast.to(room).emit('end_turn')
+    // }
   })
 
-  socket.on('correct_guess', data => {
-    const room = data.room
+  // socket.on('correct_guess', data => {
+  //   const room = data.room
 
-    if (room)
-      socket.broadcast.to(room).emit('correct_guess')
-  })
+  //   if (room)
+  //     socket.broadcast.to(room).emit('correct_guess')
+  // })
 
-  socket.on('incorrect_guess', data => {
-    const room = data.room
+  // socket.on('incorrect_guess', data => {
+  //   const room = data.room
 
-    if (room)
-      socket.broadcast.to(room).emit('incorrect_guess')
-  })
+  //   if (room)
+  //     socket.broadcast.to(room).emit('incorrect_guess')
+  // })
 
   socket.on('disconnect', () => {
     // Handle when one player disconnects

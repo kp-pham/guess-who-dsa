@@ -7,7 +7,7 @@ function GameOverModal({ gameOver, winner, onClose }) {
   return createPortal(
     <>
       <div className="overlay"></div>
-      <div class="modal" id="game-over">
+      <div className="modal" id="game-over">
         <div id="summary">
           <p id="results">{winner ? "Congratulations, you won!" : "Better luck next time!"}</p>
           <p id="selected--black">You selected: Stacks</p>
