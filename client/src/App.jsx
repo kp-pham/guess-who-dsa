@@ -1,11 +1,14 @@
-import { Game } from './components'
+import { useState } from 'react'
+import { Game, Lobby } from './components'
 import { SocketProvider } from './contexts'
 
 function App() {
+  const [matched, setMatched] = useState(false)
+
   return (
     <>
       <SocketProvider>
-        <Game></Game>
+        {matched ? <Game></Game> : <Lobby></Lobby> }
       </SocketProvider>
       
     </>
