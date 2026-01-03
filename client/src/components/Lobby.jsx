@@ -1,6 +1,6 @@
 import '../styles/Lobby.css'
 
-function Lobby({ onMatched }) {
+function Lobby() {
   return (
     <main id="lobby">
       <section>

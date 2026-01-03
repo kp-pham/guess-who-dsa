@@ -3,7 +3,7 @@ import { useSocketContext } from '../contexts/hooks.js'
 import '../styles/ChatForm.css'
 
 function ChatForm() {
-  const socket = useSocketContext()
+  const { socket, room } = useSocketContext()
   const [text, setText] = useState("")
 
   function handleKeyDown(e) {
@@ -12,7 +12,7 @@ function ChatForm() {
 
       if (!isWhitespace(e.target.value)) {
         setText("")
-        socket.emit("message", { id: socket.id, text: text })
+        socket.emit("message", { id: socket.id, text: text, room: room })
       }
     }
   }

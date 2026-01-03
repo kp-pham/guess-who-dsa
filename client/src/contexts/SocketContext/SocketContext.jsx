@@ -14,8 +14,8 @@ function SocketProvider({ children }) {
       setMatched(true)
     }
 
-    socket.on('matched', () => handleMatched(room))
-    return () => socket.off('matched', () => handleMatched(room))
+    socket.on('matched', handleMatched)
+    return () => socket.off('matched', handleMatched)
   }, [room])
 
   return (

@@ -47,7 +47,10 @@ io.on('connection', socket => {
   match()
 
   socket.on('message', data => {
-    io.emit('message', data)
+    const room = data.room
+
+    if (room)
+      io.to(room).emit('message', data)
   })
 
   socket.on('activity', () => {
