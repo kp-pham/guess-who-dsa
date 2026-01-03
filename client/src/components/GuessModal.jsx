@@ -8,8 +8,8 @@ function GuessModal({ open, remaining, onClose }) {
     <>
       <div id="overlay"></div>
       <div id="guess-modal">
-        <select>
-          <option value="" disabled>Select data structure or algorithm...</option>
+        <label for="select-guess">Select data structure or algorithm...</label>
+        <select id="select-guess">
             {remaining.map((card, index) => {
               return (
                 <option key={index} value={card}>
@@ -18,8 +18,10 @@ function GuessModal({ open, remaining, onClose }) {
               )
             })}
         </select>
-        <button onClick={onClose} type="button">Cancel</button>
-        <button type="submit">Guess</button>
+        <div class="actions">
+          <button id="cancel" onClick={onClose} type="button">Cancel</button>
+          <button id="make-guess" type="submit">Guess</button>
+        </div>
       </div>
     </>,
     document.getElementById('portal') 

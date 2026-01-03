@@ -14,4 +14,23 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #FFFFFF;
+  background-color: #181818;
+  padding: 10px;
+  border: 2px solid #4d5055;
+  border-radius: 5px;
+  width: clamp(280px, 90vw, 480px);
+  min-height: 240px;
+  max-height: 80vh;
+}
+
+#cancel,
+#make-guess {
+  color: #FFFFFF;
+  background-color: #181818;
+  border: 2px solid #4d5055;
+  border-radius: 5px;
 }

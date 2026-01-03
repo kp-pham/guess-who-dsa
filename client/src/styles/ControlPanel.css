@@ -1,8 +1,6 @@
 #control-panel {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  /* justify-content: center;
-  align-items: stretch; */
   gap: 5px;
   padding: 10px;
   background-color: #181818;
