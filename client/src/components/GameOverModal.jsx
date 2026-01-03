@@ -8,15 +8,15 @@ function GameOverModal({ gameOver, winner, onClose }) {
     <>
       <div className="overlay"></div>
       <div class="modal" id="game-over">
-        <div id="outcome">
-          <p style={{textAlign: "center"}}>{winner ? "You won!" : "You lost!"}</p>
-          <p>You selected: Stacks</p>
-          <p>Your opponent selected: Topological Sort</p>
+        <div id="summary">
+          <p id="results">{winner ? "Congratulations, you won!" : "Better luck next time!"}</p>
+          <p id="selected--black">You selected: Stacks</p>
+          <p id="selected--red">Your opponent selected: Topological Sort</p>
         </div>
        
         <div id="hand">
-          <div id="player">Stacks</div>
-          <div id="opponent">Topological Sort</div>
+          <div id="hand--black">Stacks</div>
+          <div id="hand--red">Topological Sort</div>
         </div>
       </div>
     </>,

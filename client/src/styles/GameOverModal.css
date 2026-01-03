@@ -3,12 +3,8 @@
 #game-over {
   display: grid;
   justify-content: center;
-  grid-template-rows: 0.25fr 0.75fr;
+  grid-template-rows: 0.4fr 0.6fr;
 }
-
-/* #outcome {
-  text-align: center;
-} */
 
 #hand {
   display: grid;
@@ -16,8 +12,28 @@
   gap: 20px;
 }
 
-#player,
-#opponent {
+#results {
+  padding: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#selected--black,
+#selected--red {
+  padding: 5px;
+}
+
+#selected--black {
+  background-color: black;
+}
+
+#selected--red {
+  background-color: red;
+}
+
+#hand--black,
+#hand--red {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,12 +42,12 @@
   border-radius: 5px;
 }
 
-#player {
+#hand--black {
   background-color: black;
   grid-column-start: 2;
 }
 
-#opponent {
+#hand--red {
   background-color: red;
   grid-column-start: 3;
 }
