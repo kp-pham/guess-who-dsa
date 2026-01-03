@@ -1,15 +1,34 @@
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useSocket } from '../contexts/hooks.js'
 import '../styles/GuessModal.css'
 
-function GuessModal({ open, remaining, onClose }) {
+function GuessModal({ open, remaining, onClose, onGuess }) {
+  const [guess, setGuess] = useState('')
+  const socket = useSocket()
+
+  function handleChange(e) {
+    setGuess(e.target.value)
+  }
+
+  function handleGuess(e) {
+    e.preventDefault()
+    onGuess()
+    socket.emit('guess', guess)
+  }
+
   if (!open) return null
 
   return createPortal(
     <>
       <div id="overlay"></div>
-      <div id="guess-modal">
-        <label for="select-guess">Select data structure or algorithm...</label>
-        <select id="select-guess">
+      <form id="guess-modal" onSubmit={handleGuess}>
+        <label htmlFor="select-guess">Select data structure or algorithm...</label>
+        <select 
+          id="select-guess"
+          value={guess} 
+          onChange={handleChange}>
+            <option value="" disabled hidden></option>
             {remaining.map((card, index) => {
               return (
                 <option key={index} value={card}>
@@ -18,11 +37,11 @@ function GuessModal({ open, remaining, onClose }) {
               )
             })}
         </select>
-        <div class="actions">
+        <div className="actions">
           <button id="cancel" onClick={onClose} type="button">Cancel</button>
           <button id="make-guess" type="submit">Guess</button>
         </div>
-      </div>
+      </form>
     </>,
     document.getElementById('portal') 
   )

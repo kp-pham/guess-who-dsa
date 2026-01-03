@@ -36,4 +36,8 @@ io.on('connection', socket => {
   socket.on('end_turn', () => {
     socket.broadcast.emit('end_turn')
   })
+
+  socket.on('guess', data => {
+    socket.broadcast.emit('guess', data)
+  })
 })

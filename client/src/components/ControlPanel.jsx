@@ -44,7 +44,8 @@ function ControlPanel({ selected, remaining }) {
       <GuessModal
         open={open}
         remaining={remaining}
-        onClose={() => setOpen(false)}>
+        onClose={() => setOpen(false)}
+        onGuess={() => setTurn(false)}>
       </GuessModal>
     </section>
   )
