@@ -12,6 +12,7 @@ function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
   const [incorrectGuess, setIncorrectGuess] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [winner, setWinner] = useState(false)
   const socket = useSocket()
 
   const selectedCard = useMemo(() => {
