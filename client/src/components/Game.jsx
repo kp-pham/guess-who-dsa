@@ -1,5 +1,6 @@
 import ChatPanel from './ChatPanel.jsx'
 import Gameboard from './Gameboard.jsx'
+import '../styles/Game.css'
 
 function Game() {
   return (
