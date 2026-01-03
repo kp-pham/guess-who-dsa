@@ -1,8 +1,8 @@
 import { createPortal } from 'react-dom'
 import '../styles/GameOverModal.css'
 
-function GameOverModal({ open }) {
-  if (!open) return null
+function GameOverModal({ gameOver, onClose }) {
+  if (!gameOver) return null
 
   return createPortal(
     <>

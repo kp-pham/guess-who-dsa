@@ -3,13 +3,15 @@ import { useSocket } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import GameOverModal from './GameOverModal.jsx'
+import IncorrectGuessModal from './IncorrectGuessModal.jsx'
 import '../styles/Gameboard.css'
 
 const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary Search Trees', 'Red-Black Trees', 'Preorder Traversal', 'Inorder Traversal', 'Postorder Traversal', 'Level-order Traversal', 'Skip Lists', 'Graphs', 'Dijkstra\'s Algorithm', 'Topological Sort', 'Insertion Sort', 'Selection Sort', 'Treesort', 'Heapsort', 'Quicksort', 'Merge Sort', 'Counting Sort', 'Radix Sort', 'Union-Find']
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
-  const [open, setOpen] = useState(false)
+  const [incorrectGuess, setIncorrectGuess] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
   const socket = useSocket()
 
   const selectedCard = useMemo(() => {
@@ -70,9 +72,13 @@ function Gameboard() {
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
       <GameOverModal
-        open={open}
-        onClose={() => setOpen(false)}>
+        open={gameOver}
+        onClose={() => setGameOver(false)}>
       </GameOverModal>
+      <IncorrectGuessModal
+        incorrectGuess={incorrectGuess}
+        onClose={() => setIncorrectGuess(false)}>
+      </IncorrectGuessModal>
     </section>
   )
 }
