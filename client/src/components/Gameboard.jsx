@@ -40,7 +40,7 @@ function Gameboard() {
 
     socket.on('game_won', handleGameWon)
     return () => socket.off('game_won', handleGameWon)
-  })
+  }, [socket])
 
   useEffect(() => {
     function handleGameLost() {
@@ -50,7 +50,7 @@ function Gameboard() {
 
     socket.on('game_lost', handleGameLost)
     return () => socket.off('game_lost', handleGameLost)
-  })
+  }, [socket])
 
   useEffect(() => {
     function handleIncorrectGuess() {

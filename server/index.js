@@ -28,8 +28,12 @@ const rooms = {}
 
 function match() {
   while (queue.length >= 2) {
-    const player1 = queue.shift()
-    const player2 = queue.shift()
+    const player1 = io.sockets.sockets.get(queue.shift())
+    const player2 = io.sockets.sockets.get(queue.shift())
+
+    if (!player1 || !player2)
+      return
+
     startGame(player1, player2)
   }
 }
@@ -48,8 +52,7 @@ function startGame(player1, player2) {
 }
 
 io.on('connection', socket => {
-  console.log(`User Connected: ${socket.id}`)
-  queue.push(socket)
+  queue.push(socket.id)
   match()
 
   socket.on('start_game', data => {
@@ -101,9 +104,9 @@ io.on('connection', socket => {
   })
 
   socket.on('disconnect', () => {
-    // Handle when one player disconnects
+    const index = queue.indexOf(socket.id)
 
-    const index = queue.indexOf(socket)
-    if (index !== -1) queue.splice(index, 1)
+    if (index !== -1) 
+      queue.splice(index, 1)
   })
 })
