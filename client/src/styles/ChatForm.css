@@ -1,13 +1,15 @@
+@import url("./variables.css");
+
 #chat-form {
   display: flex;
-  background-color: #181818;
-  border-top: 2px solid #4d5055;
+  background-color: var(--color-base-bg);
+  border-top: var(--base-border);
 }
 
 textarea {
   flex: 1;
   padding: 10px;
-  color: #FFFFFF;
+  color: var(--color-base-text);
   background: transparent;
   border: none;
 }

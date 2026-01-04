@@ -1,10 +1,12 @@
+@import url("./variables.css");
+
 #control-panel {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 5px;
   padding: 10px;
-  background-color: #181818;
-  border-top: 2px solid #4d5055;
+  background-color: var(--color-base-bg);
+  border-top: var(--base-border);
 }
 
 #selected {
@@ -13,10 +15,10 @@
   align-items: center;
   text-align: center;
   grid-column: span 1;
-  color: #ffffff;
-  background-color: black;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  color: var(--color-base-text);
+  background-color: var(--color-selected-bg);
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
 }
 
 #controls {
@@ -30,8 +32,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background-color: #181818;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
 }

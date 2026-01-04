@@ -1,0 +1,14 @@
+:root {
+  --color-base-bg: #181818;
+  --color-base-text: #ffffff;
+  --color-base-border: #4d5055;
+  --color-body-bg: #1f1f1f;
+  --color-activity-bg: #4d5055;
+  --color-message-left-bg: #ff0000;
+  --color-message-right-bg: #000000;
+  --color-opponent-selected-bg: #ff0000;
+  --color-selected-bg: #000000;
+  --color-modal-overlay: rgba(0, 0, 0, 0.7);
+  --base-border-radius: 5px;
+  --base-border: 2px solid var(--color-base-border);
+}

@@ -1,10 +1,12 @@
+@import url("./variables.css");
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--color-modal-overlay);
   z-index: 1000;
 }
 
@@ -14,11 +16,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  color: #FFFFFF;
-  background-color: #181818;
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
   padding: 10px;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
   width: clamp(280px, 90vw, 480px);
   min-height: 280px;
   max-height: 80vh;

@@ -1,3 +1,4 @@
+@import url("./variables.css");
 @import url("./Modal.css");
 
 #incorrect-guess {
@@ -14,9 +15,9 @@
 }
 
 #close {
-  color: #ffffff;
-  background-color: #181818;
-  border: 2px solid #4d5055;
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
+  border: var(--base-border);
   padding: 5px;
-  border-radius: 5px;
+  border-radius: var(--base-border-radius);
 }

@@ -1,3 +1,4 @@
+@import url("./variables.css");
 @import url("./Modal.css");
 
 #game-over {
@@ -25,11 +26,11 @@
 }
 
 #selected--black {
-  background-color: black;
+  background-color: var(--color-selected-bg);
 }
 
 #selected--red {
-  background-color: red;
+  background-color: var(--color-opponent-selected-bg);
 }
 
 #hand--black,
@@ -38,24 +39,24 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
 }
 
 #hand--black {
-  background-color: black;
+  background-color: var(--color-selected-bg);
   grid-column-start: 2;
 }
 
 #hand--red {
-  background-color: red;
+  background-color: var(--color-opponent-selected-bg);
   grid-column-start: 3;
 }
 
 #replay {
   justify-self: center;
-  color: #ffffff;
-  background-color: #181818;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
 }

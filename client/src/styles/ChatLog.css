@@ -17,11 +17,11 @@
 }
 
 .message--left {
-  background-color: red;
+  background-color: var(--color-message-left-bg);
   align-self: flex-start;
 }
 
 .message--right {
-  background-color: black;
+  background-color: var(--color-message-right-bg);
   align-self: flex-end;
 }

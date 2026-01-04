@@ -1,3 +1,5 @@
+@import url("./variables.css");
+
 #lobby {
   display: flex;
   flex-direction: column;
@@ -5,20 +7,20 @@
   align-items: center;
   gap: 10px;
   height: 100vh;
-  color: #ffffff;
+  color: var(--color-base-text);
 }
 
 #status {
-  color: #ffffff;
+  color: var(--color-base-text);
   font-size: 1.2rem;
   font-weight: bold;
 }
 
 #tip {
-  color: #ffffff;
-  background-color: #181818;
-  border: 2px solid #4d5055;
-  border-radius: 5px;
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
+  border: var(--base-border);
+  border-radius: var(--base-border-radius);
   padding: 10px;
   width: 50%;
   min-height: 100px;
