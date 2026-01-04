@@ -37,7 +37,7 @@ function Activity() {
     socket.on('message', handleMessage)
 
     return () => socket.off('message', handleMessage)
-  })
+  }, [socket])
 
   return (
     <div 

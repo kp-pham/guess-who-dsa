@@ -5,7 +5,7 @@ import '../styles/ControlPanel.css'
 
 function ControlPanel({ selected, remaining }) {
   const [open, setOpen] = useState(false)
-  const [turn, setTurn] = useState(true)
+  const [turn, setTurn] = useState(false)
   const { socket, room } = useSocketContext()
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function ControlPanel({ selected, remaining }) {
 
     socket.on('start_game', handleStartGame)
     return () => socket.off('start_game', handleStartGame)
-  })
+  }, [socket])
 
   useEffect(() => {
     function startTurn() {
