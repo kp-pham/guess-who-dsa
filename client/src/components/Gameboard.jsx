@@ -61,6 +61,15 @@ function Gameboard() {
     return () => socket.off('incorrect_guess', handleIncorrectGuess)
   }, [socket])
 
+  useEffect(() => {
+    function handleDisconnect() {
+      console.log("handle")
+    }
+
+    socket.on('opponent_disconnected', handleDisconnect)
+    return () => socket.off('opponent_disconnected', handleDisconnect)
+  }, [socket])
+
   return (
     <section id="gameboard">
       <CardGrid 

@@ -88,7 +88,7 @@ io.on('connection', socket => {
     if (guess === opponentSelected) {
       const selected = rooms[room].players[socket.id].selected
       const message = { selected: selected, opponentSelected: opponentSelected }
-
+      
       socket.emit('game_won', message)
       socket.broadcast.to(room).emit('game_lost', message)
     }
@@ -104,6 +104,18 @@ io.on('connection', socket => {
 
     if (index !== -1) 
       queue.splice(index, 1)
+
+    const room = Object.keys(rooms).find(room => socket.id in rooms[room].players)
+
+    if (!roomExists(room)) 
+      return
+
+    const opponentId = Object.keys(rooms[room].players).find(id => id !== socket.id)
+
+    if (opponentConnected(opponentId))
+      io.to(opponentId).emit('opponent_disconnected')
+
+    delete rooms[room]
   })
 })
 
@@ -162,4 +174,8 @@ function playerInRoom(room, player) {
 
 function validTurn(room, player) {
   return player === rooms[room].currentPlayer
+}
+
+function opponentConnected(opponentId) {
+  return opponentId && io.sockets.sockets.get(opponentId)
 }
