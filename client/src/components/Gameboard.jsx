@@ -7,7 +7,7 @@ import GameOverModal from './GameOverModal.jsx'
 import IncorrectGuessModal from './IncorrectGuessModal.jsx'
 import '../styles/Gameboard.css'
 
-const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary Search Trees', 'Red-Black Trees', 'Preorder Traversal', 'Inorder Traversal', 'Postorder Traversal', 'Level-order Traversal', 'Skip Lists', 'Graphs', 'Dijkstra\'s Algorithm', 'Topological Sort', 'Insertion Sort', 'Selection Sort', 'Treesort', 'Heapsort', 'Quicksort', 'Merge Sort', 'Counting Sort', 'Radix Sort', 'Union-Find']
+const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary Search Trees', 'Heap', 'Priority Queue', 'Red-Black Trees', 'Preorder Traversal', 'Inorder Traversal', 'Postorder Traversal', 'Level Order Traversal', 'Graphs', 'Dijkstra\'s Algorithm', 'Directed Acyclic Graph', 'Topological Sort', 'Insertion Sort', 'Selection Sort', 'Heapsort', 'Quicksort', 'Merge Sort', 'Hash Tables', 'Union-Find']
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
