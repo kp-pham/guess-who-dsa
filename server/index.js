@@ -48,7 +48,7 @@ function startGame(player1, player2) {
       [player1.id]: { selected: null },
       [player2.id]: { selected: null }
     }, 
-    player1Turn: true
+    currentPlayer: player1.id
   }
 
   io.to(room).emit('matched', room)
@@ -61,6 +61,10 @@ function setSelected(room, id, selected) {
 function getStartingPlayer(room) {
   const index = Math.floor(Math.random() * 2)
   return Object.keys(rooms[room].players)[index]
+}
+
+function getNextPlayer(room, current) {
+  return Object.keys(rooms[room].players).find(id => id !== current)
 }
 
 io.on('connection', socket => {
@@ -94,15 +98,25 @@ io.on('connection', socket => {
   socket.on('end_turn', data => {
     const room = data.room
 
-    if (room)
-      socket.broadcast.to(room).emit('end_turn')
+    if (!room)
+      return 
+
+    if (socket.id !== rooms[room].currentPlayer)
+      return
+
+    socket.broadcast.to(room).emit('end_turn')
+    rooms[room].currentPlayer = getNextPlayer(room, socket.id)
   })
 
   socket.on('guess', data => {
     const { room, guess } = data
-    
-    if (!room) return
 
+     if (!room)
+      return
+
+    if (socket.id !== rooms[room].currentPlayer)
+      return
+    
     const opponentId = Object.keys(rooms[room].players).find(id => id !== socket.id)
     const opponentSelected = rooms[room].players[opponentId].selected
 
@@ -116,6 +130,7 @@ io.on('connection', socket => {
     else {
       socket.emit('incorrect_guess')
       socket.broadcast.to(room).emit('end_turn')
+      rooms[room].currentPlayer = getNextPlayer(room, socket.id)
     }
   })
 
