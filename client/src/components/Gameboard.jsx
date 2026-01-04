@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useSocketContext } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
+import DisconnectModal from './DisconnectModal.jsx'
 import GameOverModal from './GameOverModal.jsx'
 import IncorrectGuessModal from './IncorrectGuessModal.jsx'
 import '../styles/Gameboard.css'
@@ -10,6 +11,7 @@ const cards = ['Arrays', 'Stacks', 'Queues', 'Deques', 'Linked Lists', 'Binary S
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
+  const [disconnected, setDisconnected] = useState(false)
   const [incorrectGuess, setIncorrectGuess] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [winner, setWinner] = useState(false)
@@ -63,7 +65,7 @@ function Gameboard() {
 
   useEffect(() => {
     function handleDisconnect() {
-      console.log("handle")
+      setDisconnected(true)
     }
 
     socket.on('opponent_disconnected', handleDisconnect)
@@ -81,6 +83,9 @@ function Gameboard() {
         selected={selectedCard}
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
+      <DisconnectModal
+        disconnected={disconnected}>
+      </DisconnectModal>
       <GameOverModal
         gameOver={gameOver}
         winner={winner}
