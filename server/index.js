@@ -26,6 +26,87 @@ const io = new Server(expressServer, {
 const queue = []
 const rooms = {}
 
+io.on('connection', socket => {
+  queue.push(socket.id)
+  match()
+
+  socket.on('ready', data => {
+    const { selected, room } = data
+
+    if (!roomExists(room)) return
+    if (!roomRegistered(room)) return
+    if (!playerInRoom(room, socket.id)) return
+
+    const startingPlayer = getStartingPlayer(room)
+    setSelected(room, socket.id, selected)
+    socket.emit('start_game', startingPlayer)
+  })
+
+  socket.on('message', data => {
+    const room = data.room
+
+    if (!roomExists(room)) return
+    if (!roomRegistered(room)) return
+    if (!playerInRoom(room, socket.id)) return
+
+    io.to(room).emit('message', data)
+  })
+
+  socket.on('activity', data => {
+    const room = data.room
+
+    if (!roomExists(room)) return
+    if (!roomRegistered(room)) return
+    if (!playerInRoom(room, socket.id)) return
+    
+    socket.broadcast.to(room).emit('activity')
+  })
+
+  socket.on('end_turn', data => {
+    const room = data.room
+
+    if (!roomExists(room)) return 
+    if (!roomRegistered(room)) return
+    if (!playerInRoom(room, socket.id)) return
+    if (!validTurn(room, socket.id)) return
+
+    socket.broadcast.to(room).emit('end_turn')
+    rooms[room].currentPlayer = getNextPlayer(room, socket.id)
+  })
+
+  socket.on('guess', data => {
+    const { room, guess } = data
+
+    if (!roomExists(room)) return
+    if (!roomRegistered(room)) return
+    if (!playerInRoom(room, socket.id)) return
+    if (!validTurn(room, socket.id)) return
+    
+    const opponentId = Object.keys(rooms[room].players).find(id => id !== socket.id)
+    const opponentSelected = rooms[room].players[opponentId].selected
+
+    if (guess === opponentSelected) {
+      const selected = rooms[room].players[socket.id].selected
+      const message = { selected: selected, opponentSelected: opponentSelected }
+
+      socket.emit('game_won', message)
+      socket.broadcast.to(room).emit('game_lost', message)
+    }
+    else {
+      socket.emit('incorrect_guess')
+      socket.broadcast.to(room).emit('end_turn')
+      rooms[room].currentPlayer = getNextPlayer(room, socket.id)
+    }
+  })
+
+  socket.on('disconnect', () => {
+    const index = queue.indexOf(socket.id)
+
+    if (index !== -1) 
+      queue.splice(index, 1)
+  })
+})
+
 function match() {
   while (queue.length >= 2) {
     const player1 = io.sockets.sockets.get(queue.shift())
@@ -67,77 +148,18 @@ function getNextPlayer(room, current) {
   return Object.keys(rooms[room].players).find(id => id !== current)
 }
 
-io.on('connection', socket => {
-  queue.push(socket.id)
-  match()
+function roomExists(room) {
+  return Boolean(room)
+}
 
-  socket.on('ready', data => {
-    const { selected, room } = data
+function roomRegistered(room) {
+  return room in rooms
+}
 
-    if (room) {
-      const startingPlayer = getStartingPlayer(room)
-      setSelected(room, socket.id, selected)
-      socket.emit('start_game', startingPlayer)
-    }
-  })
+function playerInRoom(room, player) {
+  return player in rooms[room].players
+}
 
-  socket.on('message', data => {
-    const room = data.room
-
-    if (room)
-      io.to(room).emit('message', data)
-  })
-
-  socket.on('activity', data => {
-    const room = data.room
-
-    if (room)
-      socket.broadcast.to(room).emit('activity')
-  })
-
-  socket.on('end_turn', data => {
-    const room = data.room
-
-    if (!room)
-      return 
-
-    if (socket.id !== rooms[room].currentPlayer)
-      return
-
-    socket.broadcast.to(room).emit('end_turn')
-    rooms[room].currentPlayer = getNextPlayer(room, socket.id)
-  })
-
-  socket.on('guess', data => {
-    const { room, guess } = data
-
-     if (!room)
-      return
-
-    if (socket.id !== rooms[room].currentPlayer)
-      return
-    
-    const opponentId = Object.keys(rooms[room].players).find(id => id !== socket.id)
-    const opponentSelected = rooms[room].players[opponentId].selected
-
-    if (guess === opponentSelected) {
-      const selected = rooms[room].players[socket.id].selected
-      const message = { selected: selected, opponentSelected: opponentSelected }
-
-      socket.emit('game_won', message)
-      socket.broadcast.to(room).emit('game_lost', message)
-    }
-    else {
-      socket.emit('incorrect_guess')
-      socket.broadcast.to(room).emit('end_turn')
-      rooms[room].currentPlayer = getNextPlayer(room, socket.id)
-    }
-  })
-
-  socket.on('disconnect', () => {
-    const index = queue.indexOf(socket.id)
-
-    if (index !== -1) 
-      queue.splice(index, 1)
-  })
-})
+function validTurn(room, player) {
+  return player === rooms[room].currentPlayer
+}
