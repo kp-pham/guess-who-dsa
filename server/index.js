@@ -58,6 +58,11 @@ function setSelected(room, id, selected) {
   rooms[room].players[id].selected = selected
 }
 
+function getStartingPlayer(room) {
+  const index = Math.floor(Math.random() * 2)
+  return Object.keys(rooms[room].players)[index]
+}
+
 io.on('connection', socket => {
   queue.push(socket.id)
   match()
@@ -66,8 +71,9 @@ io.on('connection', socket => {
     const { selected, room } = data
 
     if (room) {
+      const startingPlayer = getStartingPlayer(room)
       setSelected(room, socket.id, selected)
-      socket.emit('start_game', { })
+      socket.emit('start_game', startingPlayer)
     }
   })
 

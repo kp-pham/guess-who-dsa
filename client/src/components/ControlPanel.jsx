@@ -9,6 +9,15 @@ function ControlPanel({ selected, remaining }) {
   const { socket, room } = useSocketContext()
 
   useEffect(() => {
+    function handleStartGame(startingPlayer) {
+      setTurn(socket.id === startingPlayer)  
+    }
+
+    socket.on('start_game', handleStartGame)
+    return () => socket.off('start_game', handleStartGame)
+  })
+
+  useEffect(() => {
     function startTurn() {
       setTurn(true)
     }
