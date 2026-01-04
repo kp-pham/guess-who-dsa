@@ -84,7 +84,8 @@ function Gameboard() {
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
       <DisconnectModal
-        disconnected={disconnected}>
+        disconnected={disconnected}
+        onClose={() => setDisconnected(false)}>
       </DisconnectModal>
       <GameOverModal
         gameOver={gameOver}

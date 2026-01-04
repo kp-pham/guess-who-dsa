@@ -13,7 +13,7 @@ function GameOverModal({ gameOver, winner, onClose }) {
           <p id="selected--black">You selected: Stacks</p>
           <p id="selected--red">Your opponent selected: Topological Sort</p>
         </div>
-       
+        
         <div id="hand">
           <div id="hand--black">Stacks</div>
           <div id="hand--red">Topological Sort</div>

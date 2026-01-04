@@ -3,6 +3,7 @@ import { Server } from 'socket.io'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import crypto from 'crypto'
+import { on } from 'events'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -97,6 +98,12 @@ io.on('connection', socket => {
       socket.broadcast.to(room).emit('end_turn')
       rooms[room].currentPlayer = getNextPlayer(room, socket.id)
     }
+  })
+
+  socket.on('rejoin', () => {
+    socket.emit('rejoin')
+    queue.push(socket.id)
+    match()
   })
 
   socket.on('disconnect', () => {

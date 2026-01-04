@@ -18,6 +18,16 @@ function SocketProvider({ children }) {
     return () => socket.off('matched', handleMatched)
   }, [room])
 
+  useEffect(() => {
+    function handleRejoin() {
+      setRoom(null)
+      setMatched(false)
+    }
+
+    socket.on('rejoin', handleRejoin)
+    return () => socket.off('rejoin', handleRejoin)
+  }, [])
+
   return (
     <SocketContext.Provider value={{ socket, room, matched }}>
       {children}
