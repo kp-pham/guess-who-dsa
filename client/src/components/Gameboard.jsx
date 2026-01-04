@@ -58,7 +58,12 @@ function Gameboard() {
   }, [socket])
 
   useEffect(() => {
-    function handleIncorrectGuess() {
+    function handleIncorrectGuess(guess) {
+      setEliminated(previous => {
+        const current = new Set(previous)
+        current.has(guess) ? current.delete(guess) : current.add(guess)
+        return current
+      })
       setIncorrectGuess(true)
     }
     

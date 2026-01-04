@@ -94,7 +94,7 @@ io.on('connection', socket => {
       socket.broadcast.to(room).emit('game_lost', message)
     }
     else {
-      socket.emit('incorrect_guess')
+      socket.emit('incorrect_guess', guess)
       socket.broadcast.to(room).emit('end_turn')
       rooms[room].currentPlayer = getNextPlayer(room, socket.id)
     }
