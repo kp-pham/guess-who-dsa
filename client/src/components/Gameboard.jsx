@@ -47,7 +47,8 @@ function Gameboard() {
   }, [socket])
 
   useEffect(() => {
-    function handleGameLost() {
+    function handleGameLost(payload) {
+      setReveal(payload)
       setGameOver(true)
       setWinner(false)
     }

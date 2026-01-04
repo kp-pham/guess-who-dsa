@@ -1,8 +1,16 @@
 import { createPortal } from 'react-dom'
+import { useSocketContext } from '../contexts/hooks.js'
 import '../styles/GameOverModal.css'
 
 function GameOverModal({ gameOver, reveal, winner, onClose }) {
+  const { socket } = useSocketContext()
+
   if (!gameOver) return null
+
+  function handleClick() {
+    onClose()
+    socket.emit('leave_game')
+  }
 
   return createPortal(
     <>
@@ -18,6 +26,8 @@ function GameOverModal({ gameOver, reveal, winner, onClose }) {
           <div id="hand--black">{reveal.selected}</div>
           <div id="hand--red">{reveal.opponentSelected}</div>
         </div>
+
+        <button id="replay" onClick={handleClick} type="button">Replay</button>
       </div>
     </>,
     document.getElementById('portal')

@@ -100,8 +100,8 @@ io.on('connection', socket => {
     }
   })
 
-  socket.on('rejoin', () => {
-    socket.emit('rejoin')
+  socket.on('leave_game', () => {
+    socket.emit('leave_game')
     queue.push(socket.id)
     match()
   })

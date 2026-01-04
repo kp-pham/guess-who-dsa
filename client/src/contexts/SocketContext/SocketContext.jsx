@@ -24,8 +24,8 @@ function SocketProvider({ children }) {
       setMatched(false)
     }
 
-    socket.on('rejoin', handleRejoin)
-    return () => socket.off('rejoin', handleRejoin)
+    socket.on('leave_game', handleRejoin)
+    return () => socket.off('leave_game', handleRejoin)
   }, [])
 
   return (

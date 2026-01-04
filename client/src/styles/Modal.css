@@ -20,6 +20,6 @@
   border: 2px solid #4d5055;
   border-radius: 5px;
   width: clamp(280px, 90vw, 480px);
-  min-height: 240px;
+  min-height: 280px;
   max-height: 80vh;
 }

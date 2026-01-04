@@ -9,7 +9,7 @@ function DisconnectModal({ disconnected, onClose }) {
 
   function handleClick() {
     onClose()
-    socket.emit('rejoin')
+    socket.emit('leave_game')
   }
 
   return createPortal(
