@@ -1,5 +1,3 @@
-import Game from './Game.jsx'
-import Lobby from './Lobby.jsx'
-import MobileRedirect from './MobileRedirect.jsx'
+import Root from './Root.jsx'
 
-export { Game, Lobby, MobileRedirect }
+export default Root

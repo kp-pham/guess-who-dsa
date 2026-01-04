@@ -1,5 +1,6 @@
-import { Game, Lobby } from './components'
-import { useSocketContext } from './contexts/hooks.js'
+import Game from './Game.jsx'
+import Lobby from './Lobby.jsx'
+import { useSocketContext } from '../contexts/hooks.js'
 
 function App() {
   const { matched } = useSocketContext()
