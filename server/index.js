@@ -54,6 +54,10 @@ function startGame(player1, player2) {
   io.to(room).emit('matched', room)
 }
 
+function setSelected(room, id, selected) {
+  rooms[room].players[id].selected = selected
+}
+
 io.on('connection', socket => {
   queue.push(socket.id)
   match()
@@ -62,7 +66,7 @@ io.on('connection', socket => {
     const { selected, room } = data
 
     if (room) {
-      rooms[room].players[socket.id].selected = selected
+      setSelected(room, socket.id, selected)
       socket.emit('start_game', { })
     }
   })
