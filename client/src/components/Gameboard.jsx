@@ -14,6 +14,7 @@ function Gameboard() {
   const [disconnected, setDisconnected] = useState(false)
   const [incorrectGuess, setIncorrectGuess] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [reveal, setReveal] = useState(null)
   const [winner, setWinner] = useState(false)
   const { socket, room } = useSocketContext()
 
@@ -35,7 +36,8 @@ function Gameboard() {
   }
 
   useEffect(() => {
-    function handleGameWon() {
+    function handleGameWon(payload) {
+      setReveal(payload)
       setGameOver(true)
       setWinner(true)
     }
@@ -89,6 +91,7 @@ function Gameboard() {
       </DisconnectModal>
       <GameOverModal
         gameOver={gameOver}
+        reveal={reveal}
         winner={winner}
         onClose={() => setGameOver(false)}>
       </GameOverModal>
