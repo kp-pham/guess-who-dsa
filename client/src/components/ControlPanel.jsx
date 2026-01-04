@@ -34,19 +34,27 @@ function ControlPanel({ selected, remaining }) {
   return (
     <section id="control-panel">
       <div id="selected">{selected}</div>
-      <div>
+      <div id="controls">
         <button 
           id="guess"
           type="button"
           disabled={!turn}
-          onClick={() => setOpen(true)}>
+          onClick={() => setOpen(true)}
+          style={{
+            opacity: !turn ? 0.4 : 1,
+            filter: !turn ? "grayscale(100%)" : "none"
+          }}>
             Guess
         </button>
         <button 
           id="end-turn" 
           type="button"
           disabled={!turn}
-          onClick={endTurn}>
+          onClick={endTurn}
+          style={{
+            opacity: !turn ? 0.4 : 1,
+            filter: !turn ? "grayscale(100%)" : "none"
+          }}>
             End Turn
           </button>
       </div>
