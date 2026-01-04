@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import '../styles/Lobby.css'
 
 const tips = [
@@ -17,24 +18,35 @@ const tips = [
   'Inorder Traversal: Left subtree (1), Root (2), Right subtree (3)',
   'Postorder Traversal: Left Subtree (1), Right Subtree (2), Root (3)',
   'Tree traversals take O(n) time when binary trees becomes degenerate.',
-  'Level Order Traversal uses a queue to traverse nodes in the same level before moving down to the next level.',
+  'Level Order Traversal uses a queue to traverse nodes in the same level before the next level.',
   'Dijkstra\'s Algorithm uses the priority queue to determine the shortest path from the source node to all other nodes in the graph.',
   'Directed Acyclic Graphs (DAGs) are required for Topological Sort.',
   'O(n log(n)) is the lower bound time complexity for comparison-based sorting.',
-  'Stable sorting algorithms sort repeated elements in the same order as the elements appear in the input.',
+  'Stable sorting algorithms sort repeated elements in the same order as they appear in the input.',
   'Divide and Conquer algorithms recursively break down larger problems into smaller subproblems.',
   'Hash tables use a hash function to generate a hash value for keys which are used to index for values.',
   'The Union-Find Algorithm uses a disjoint-set forest to determine whether two elements belong in the same equivalence class.',
 ]
 
 function Lobby() {
+  const [index, setIndex] = useState(Math.floor(Math.random() * tips.length))
+
+  function handleClick() {
+    let current;
+    do {
+      current = Math.floor(Math.random() * tips.length)
+    } while (index === current)
+    
+    setIndex(current)
+  }
+
   return (
     <main id="lobby">
       <section>
         <p id="status">Finding opponent...</p>
       </section>
-      <button>
-        
+      <button id="tip" onClick={handleClick} type="button">
+        {tips[index]}
       </button>
     </main>
   )
