@@ -24,12 +24,13 @@ function GuessModal({ open, remaining, onClose, onGuess }) {
   return createPortal(
     <>
       <div className="overlay"></div>
-      <form className="modal" id="guess" onSubmit={handleGuess}>
+      <form className="modal" id="guess-form" onSubmit={handleGuess}>
         <label htmlFor="select-guess">Select data structure or algorithm...</label>
         <select 
           id="select-guess"
           value={guess} 
-          onChange={handleChange}>
+          onChange={handleChange}
+          size="5">
             <option value="" disabled hidden></option>
             {remaining.map((card, index) => {
               return (

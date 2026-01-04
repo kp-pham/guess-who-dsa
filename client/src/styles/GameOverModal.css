@@ -2,7 +2,6 @@
 
 #game-over {
   display: grid;
-  justify-content: center;
   grid-template-rows: 0.3fr 0.6fr 0.1fr;
   gap: 5px;
 }
