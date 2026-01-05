@@ -16,7 +16,6 @@ app.use(express.static(fs.existsSync(devDist) ? devDist : path.join(__dirname, "
 
 const expressServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}`)
-  console.log(`Running ${process.env.NODE_ENV} build`)
 })
 
 const io = new Server(expressServer, {
