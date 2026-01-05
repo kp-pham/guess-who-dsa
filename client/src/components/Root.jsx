@@ -1,5 +1,5 @@
 import { isMobile } from 'react-device-detect'
-import { SocketProvider } from '../contexts'
+import { SocketProvider, GameStateProvider } from '../contexts'
 import  MobileRedirect from './MobileRedirect.jsx'
 import App from './App.jsx'
 import '../styles/index.css'
@@ -12,7 +12,9 @@ function Root() {
   
   return (
     <SocketProvider>
-      <App/>
+      <GameStateProvider>
+        <App/>
+      </GameStateProvider>
     </SocketProvider>
   )
 }
