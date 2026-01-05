@@ -11,6 +11,7 @@
   "scripts": {
     "start": "NODE_ENV='production' node index.js",
     "dev": "nodemon .",
+    "build": "cd ../client && npm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
