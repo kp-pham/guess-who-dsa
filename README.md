@@ -13,7 +13,7 @@ Guess Who: Data Structures and Algorithms provides a unique twist on the traditi
 - Requeue players when opponent disconnects in the middle of game session
 - Server serves as ultimate authority for game state and validates player actions
 - Cloud deployment of monorepo architecture on Koyeb
-- Containerization with Docker for hosting frontend and backend on the same server
+- Containerization with Dockerfile for hosting frontend and backend on the same server
 
 ## Installation
 
