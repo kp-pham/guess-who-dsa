@@ -1,11 +1,4 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Guess Who: Data Structures and Algorithms provides a unique twist on the traditional two-player board game. Instead of guessing a character, players are randomly assigned a data structure or algorithm and have to guess what their opponent has been assigned based on what they have learned from their Data Structures and Algorithms courses. Combining real-time multiplayer gameplay with computer science education, the game not only provides a modern take on a classic game but also helps students to learn and better understand data structures and algorithms in a fun and interactive way.
 
 ## Features
 
@@ -66,9 +59,9 @@ npm run dev
 
 ### Production
 
-> All commands assume you are at the root of project directory.
+> All commands assume you are at the root of the project directory.
 
-Create frontend development build:
+Create frontend production build:
 
 ```
 cd client
