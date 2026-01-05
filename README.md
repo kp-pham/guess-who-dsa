@@ -10,3 +10,67 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Installation
+
+Clone the repository:
+
+```
+git clone https://github.com/<YOUR_GITHUB_USERNAME>/guess-who-dsa.git
+```
+
+Change into project directory:
+
+```
+cd guess-who-dsa
+```
+
+Install client dependencies:
+
+```
+cd client 
+npm install
+```
+
+Install server dependencies:
+
+```
+cd ../server
+npm install
+```
+
+### Development
+
+> All commands assume you are at the root of the project directory.
+
+Run frontend development build:
+
+```
+cd client
+npm run dev
+```
+
+Run backend development build:
+
+```
+cd ../server
+npm run dev
+```
+
+### Production
+
+> All commands assume you are at the root of project directory.
+
+Create frontend development build:
+
+```
+cd client
+npm run build
+```
+
+Run backend production build:
+
+```
+cd ../server
+npm run start
+```
