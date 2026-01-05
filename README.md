@@ -7,9 +7,16 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Full-stack application with React frontend and Node.js + Express backend
+- Real-time chat and multiplayer using WebSockets with socket.io
+- Activity detection when other player starts typing
+- Matchmaking between players with lobby queue and room management
+- Requeue players when opponent disconnects in the middle of game session
+- Server serves as ultimate authority for game state and validates player actions
+- Cloud deployment of monorepo architecture on Koyeb
+- Containerization with Docker for hosting frontend and backend on the same server
 
 ## Installation
 
