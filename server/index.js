@@ -7,7 +7,7 @@ import crypto from 'crypto'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const PORT = process.env.port || 3500
+const PORT = process.env.PORT || 3500
 
 const app = express()
 app.use(express.static(path.join(__dirname, "../client/dist")))
@@ -18,8 +18,7 @@ const expressServer = app.listen(PORT, () => {
 
 const io = new Server(expressServer, {
   cors: {
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
-    methods: ["GET", "POST"]
+    origin: process.env.NODE_ENV === "production" ? false : ['http://localhost:5173', 'http://127.0.0.1:5173'],
   }
 });
 
