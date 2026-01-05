@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3500
 const app = express()
 app.use(express.static(path.join(__dirname, "../client/dist")))
 
-const expressServer = app.listen(PORT, () => {
+const expressServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}`)
   console.log(`Running ${process.env.NODE_ENV} build`)
 })
