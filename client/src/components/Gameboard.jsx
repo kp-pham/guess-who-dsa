@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useSocketContext } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
@@ -20,15 +20,6 @@ function Gameboard() {
   const [reveal, setReveal] = useState(null)
   const [winner, setWinner] = useState(false)
   const { socket, room } = useSocketContext()
-
-  const selectedCard = useMemo(() => {
-    const index = Math.floor(Math.random() * cards.length)
-    return cards[index]
-  }, [])
-
-  useEffect(() => {
-    socket.emit('ready', { selected: selectedCard, room: room })
-  }, [socket, selectedCard, room])
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -91,7 +82,6 @@ function Gameboard() {
         onCardClick={handleClick}>
       </CardGrid>
       <ControlPanel
-        selected={selectedCard}
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
       <DisconnectModal
