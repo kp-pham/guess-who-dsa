@@ -3,6 +3,7 @@ import { Server } from 'socket.io'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import crypto from 'crypto'
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -10,7 +11,8 @@ const __dirname = path.dirname(__filename)
 const PORT = process.env.PORT || 3500
 
 const app = express()
-app.use(express.static(path.join(__dirname, "../client/dist")))
+const devDist = path.join(__dirname, "../client/dist")
+app.use(express.static(fs.existsSync(devDist) ? devDist : path.join(__dirname, "dist")))
 
 const expressServer = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}`)
@@ -21,7 +23,7 @@ const io = new Server(expressServer, {
   cors: {
     origin: process.env.NODE_ENV === "production" ? false : ['http://localhost:5173', 'http://127.0.0.1:5173'],
   }
-});
+})
 
 const queue = []
 const rooms = {}
