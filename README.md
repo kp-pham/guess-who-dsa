@@ -1,3 +1,5 @@
+# guess-who-dsa
+
 Guess Who: Data Structures and Algorithms provides a unique twist on the traditional two-player board game. Instead of guessing a character, players are randomly assigned a data structure or algorithm and have to guess what their opponent has been assigned based on what they have learned from their Data Structures and Algorithms courses. Combining real-time multiplayer gameplay with computer science education, the game not only provides a modern take on a classic game but also helps students to learn and better understand data structures and algorithms in a fun and interactive way.
 
 ## Features
@@ -74,3 +76,7 @@ Run backend production build:
 cd ../server
 npm run start
 ```
+
+## Known Issues
+
+The user interface becomes desynchronized when socket listeners have not been mounted before communication from the server is received because the components on which the listeners are mounted have not been rendered. The server remains authoritative and maintains the correct game state. Players can rejoin matchmaking to resolve the problem.
