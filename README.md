@@ -1,5 +1,7 @@
 # guess-who-dsa
 
+> Check out the live demo [here](https://radical-winona-personal-domain-8890598e.koyeb.app/). Remember two players are needed to start the game!
+
 Guess Who: Data Structures and Algorithms provides a unique twist on the traditional two-player board game. Instead of guessing a character, players are randomly assigned a data structure or algorithm and have to guess what their opponent has been assigned based on what they have learned from their Data Structures and Algorithms courses. Combining real-time multiplayer gameplay with computer science education, the game not only provides a modern take on a classic game but also helps students to learn and better understand data structures and algorithms in a fun and interactive way.
 
 ## Features
