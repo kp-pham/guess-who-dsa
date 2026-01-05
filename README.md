@@ -79,4 +79,4 @@ npm run start
 
 ## Known Issues
 
-The user interface becomes desynchronized when socket listeners have not been mounted before communication from the server is received because the components on which the listeners are mounted have not been rendered. The server remains authoritative and maintains the correct game state. Players can rejoin matchmaking to resolve the problem.
+The user interface becomes desynchronized when socket listeners have not been mounted before communication from the server is received because the components on which the listeners are mounted have not been rendered. Players can rejoin matchmaking to resolve the problem.
