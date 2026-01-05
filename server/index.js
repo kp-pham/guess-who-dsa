@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, "../client/dist")))
 
 const expressServer = app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
+  console.log(`Running ${process.env.NODE_ENV} build`)
 })
 
 const io = new Server(expressServer, {
