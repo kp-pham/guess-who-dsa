@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SocketContext } from './useSocketContext.js'
+import { SocketContext } from './useSocket.js'
 import io from 'socket.io-client'
 
 const socket = io(process.env.NODE_ENV === "production" ?

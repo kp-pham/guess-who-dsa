@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer } from 'react'
 import { GameStateContext } from './useGameState.js'
-import { useSocketContext } from '../hooks.js'
+import { useSocket } from '../hooks.js'
 
 const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Traversal', 'Preorder Traversal', 'Selection Sort', 
                'Hash Tables', 'Inorder Traversal', 'Heap', 'Union-Find', 'Topological Sort', 'Merge Sort', 'Red-Black Trees', 
@@ -60,7 +60,7 @@ function gameReducer(state, action) {
 }
 
 function GameStateProvider({ children }) {
-  const { socket, room, setRoom } = useSocketContext()
+  const { socket, room, setRoom } = useSocket()
   const [state, dispatch] = useReducer(gameReducer, initialState)
 
   const selectedCard = useMemo(() => {

@@ -1,4 +1,4 @@
-import { useSocketContext } from './SocketContext/useSocketContext.js'
+import { useSocket } from './SocketContext/useSocket.js'
 import { useGameState } from './GameStateContext/useGameState.js'
 
-export { useSocketContext, useGameState }
+export { useSocket, useGameState }

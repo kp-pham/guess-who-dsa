@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { useSocketContext } from '../contexts/hooks.js'
+import { useSocket } from '../contexts/hooks.js'
 import '../styles/ChatLog.css'
 
 function ChatLog() {
   const [messages, setMessages] = useState([])
   const messagesEndRef = useRef(null)
-  const { socket } = useSocketContext()
+  const { socket } = useSocket()
 
   useEffect(() => {
     function handleMessage(data) {

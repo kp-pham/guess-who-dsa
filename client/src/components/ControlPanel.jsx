@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useSocketContext, useGameState } from '../contexts/hooks.js'
+import { useSocket, useGameState } from '../contexts/hooks.js'
 import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
 function ControlPanel() {
   const [open, setOpen] = useState(false)
   const [turn, setTurn] = useState(false)
-  const { socket, room } = useSocketContext()
+  const { socket, room } = useSocket()
   const { selectedCard } = useGameState()
 
   useEffect(() => {

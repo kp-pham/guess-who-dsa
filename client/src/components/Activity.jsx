@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef} from 'react'
-import { useSocketContext } from '../contexts/hooks.js'
+import { useSocket } from '../contexts/hooks.js'
 import '../styles/Activity.css'
 
 function Activity() {
   const timerRef = useRef(null)
   const [activity, setActivity] = useState(false)
-  const { socket } = useSocketContext()
+  const { socket } = useSocket()
 
   useEffect(() => {
     function handleActivity() {
