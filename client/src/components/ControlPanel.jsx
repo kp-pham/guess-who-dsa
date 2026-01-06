@@ -1,34 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSocket, useGameState } from '../contexts/hooks.js'
 import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
 function ControlPanel() {
   const [open, setOpen] = useState(false)
-  const [turn, setTurn] = useState(false)
   const { socket, room } = useSocket()
-  const { selectedCard } = useGameState()
-
-  useEffect(() => {
-    function handleStartGame(startingPlayer) {
-      setTurn(socket.id === startingPlayer)  
-    }
-
-    socket.on('start_game', handleStartGame)
-    return () => socket.off('start_game', handleStartGame)
-  }, [socket])
-
-  useEffect(() => {
-    function startTurn() {
-      setTurn(true)
-    }
-  
-    socket.on('end_turn', startTurn)
-    return () => socket.off('end_turn', startTurn)
-  }, [socket])
+  const { selectedCard, turn, dispatch } = useGameState()
   
   function endTurn() {
-    setTurn(false)
+    dispatch({ type: 'END_TURN', payload: false })
     socket.emit('end_turn', { room: room })
   }
   
@@ -62,7 +43,7 @@ function ControlPanel() {
       <GuessModal
         open={open}
         onClose={() => setOpen(false)}
-        onGuess={() => setTurn(false)}>
+        onGuess={() => dispatch({ type: 'END_TURN', payload: false })}>
       </GuessModal>
     </section>
   )

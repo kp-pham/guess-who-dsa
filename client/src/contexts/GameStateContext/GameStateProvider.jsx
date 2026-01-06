@@ -9,6 +9,7 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
 
 const initialState = {
   matched: false,
+  turn: false,
   eliminated: new Set(),
   incorrectGuess: false,
   disconnected: false,
@@ -24,6 +25,15 @@ function gameReducer(state, action) {
 
     case 'REJOIN':
       return { ...state, matched: false }
+
+    case 'START_GAME':
+      return { ...state, turn: action.payload }
+
+    case 'START_TURN':
+      return { ...state, turn: action.payload }
+
+    case 'END_TURN':
+      return { ...state, turn: action.payload }
 
     case 'OPPONENT_DISCONNECTED':
       return { ...state, disconnected: true }
@@ -91,6 +101,25 @@ function GameStateProvider({ children }) {
   useEffect(() => {
     socket.emit('ready', { selected: selectedCard, room: room })
   }, [socket, selectedCard, room])
+
+  useEffect(() => {
+    function handleStartGame(startingPlayer) {
+      console.log("here")
+      dispatch({ type: 'START_GAME', payload: (socket.id === startingPlayer) })  
+    }
+
+    socket.on('start_game', handleStartGame)
+    return () => socket.off('start_game', handleStartGame)
+  }, [socket])
+
+  useEffect(() => {
+    function startTurn() {
+      dispatch({ type: 'START_TURN', payload: true })
+    }
+  
+    socket.on('end_turn', startTurn)
+    return () => socket.off('end_turn', startTurn)
+  }, [socket])
 
   useEffect(() => {
     function handleDisconnect() {
