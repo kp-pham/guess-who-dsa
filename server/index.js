@@ -38,9 +38,8 @@ io.on('connection', socket => {
     if (!roomRegistered(room)) return
     if (!playerInRoom(room, socket.id)) return
 
-    const startingPlayer = getStartingPlayer(room)
     setSelected(room, socket.id, selected)
-    socket.emit('start_game', startingPlayer)
+    socket.emit('start_game', rooms[room].startingPlayer)
   })
 
   socket.on('message', data => {
@@ -148,7 +147,8 @@ function startGame(player1, player2) {
       [player1.id]: { selected: null },
       [player2.id]: { selected: null }
     }, 
-    currentPlayer: player1.id
+    currentPlayer: player1.id,
+    startingPlayer: Math.random() < 0.5 ? player1.id : player2.id
   }
 
   io.to(room).emit('matched', room)
@@ -156,11 +156,6 @@ function startGame(player1, player2) {
 
 function setSelected(room, id, selected) {
   rooms[room].players[id].selected = selected
-}
-
-function getStartingPlayer(room) {
-  const index = Math.floor(Math.random() * 2)
-  return Object.keys(rooms[room].players)[index]
 }
 
 function getNextPlayer(room, current) {
