@@ -1,7 +1,9 @@
+import { useGameStateContext } from '../contexts/hooks.js'
 import '../styles/CardGrid.css'
 
+function CardGrid() {
+  const { cards, eliminated, dispatch } = useGameStateContext() 
 
-function CardGrid({ cards, eliminated, onCardClick}) {
   return (
     <section id="card-grid">
       {cards.map((card, index) => {
@@ -12,7 +14,7 @@ function CardGrid({ cards, eliminated, onCardClick}) {
             className="card"
             key={index} 
             type="button" 
-            onClick={() => onCardClick(card)}
+            onClick={() => dispatch({ type: 'TOGGLE_ELIMINATION', payload: card })}
             style={{
               opacity: isEliminated ? 0.4 : 1,
               filter: isEliminated ? "grayscale(100%)" : "none"

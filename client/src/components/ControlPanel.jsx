@@ -3,7 +3,7 @@ import { useSocketContext, useGameStateContext } from '../contexts/hooks.js'
 import GuessModal from './GuessModal.jsx'
 import '../styles/ControlPanel.css'
 
-function ControlPanel({ remaining }) {
+function ControlPanel() {
   const [open, setOpen] = useState(false)
   const [turn, setTurn] = useState(false)
   const { socket, room } = useSocketContext()
@@ -61,7 +61,6 @@ function ControlPanel({ remaining }) {
       </div>
       <GuessModal
         open={open}
-        remaining={remaining}
         onClose={() => setOpen(false)}
         onGuess={() => setTurn(false)}>
       </GuessModal>

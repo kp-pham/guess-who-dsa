@@ -21,8 +21,12 @@ function gameReducer(state, action) {
     case 'OPPONENT_DISCONNECTED':
       return { ...state, disconnected: true }
 
-    case 'TOGGLE_ELIMINATION':
-      return
+    case 'TOGGLE_ELIMINATION': {
+      const current = new Set(state.eliminated)
+      current.has(action.payload) ? current.delete(action.payload) : current.add(action.payload)
+
+      return { ...state, eliminated: current }
+    }
     
     case 'INCORRECT_GUESS': {
       const current = new Set(state.eliminated)
@@ -99,7 +103,7 @@ function GameStateProvider({ children }) {
 
   
   return (
-    <GameStateContext.Provider value={{ selectedCard, ...state, dispatch }}>
+    <GameStateContext.Provider value={{ cards, selectedCard, ...state, dispatch }}>
         {children}
     </GameStateContext.Provider>
   )
