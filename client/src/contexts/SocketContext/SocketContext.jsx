@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SocketContext } from './useSocketContext.js'
 import io from 'socket.io-client'
 
@@ -7,30 +7,9 @@ const socket = io(process.env.NODE_ENV === "production" ?
   
 function SocketProvider({ children }) {
   const [room, setRoom] = useState(null)
-  const [matched, setMatched] = useState(false)
-
-  useEffect(() => {
-    function handleMatched(room) {
-      setRoom(room)
-      setMatched(true)
-    }
-
-    socket.on('matched', handleMatched)
-    return () => socket.off('matched', handleMatched)
-  }, [room])
-
-  useEffect(() => {
-    function handleRejoin() {
-      setRoom(null)
-      setMatched(false)
-    }
-
-    socket.on('leave_game', handleRejoin)
-    return () => socket.off('leave_game', handleRejoin)
-  }, [])
 
   return (
-    <SocketContext.Provider value={{ socket, room, matched }}>
+    <SocketContext.Provider value={{ socket, room, setRoom }}>
       {children}
     </SocketContext.Provider>
   )

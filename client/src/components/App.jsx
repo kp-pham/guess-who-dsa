@@ -1,9 +1,9 @@
 import Game from './Game.jsx'
 import Lobby from './Lobby.jsx'
-import { useSocketContext } from '../contexts/hooks.js'
+import { useGameStateContext } from '../contexts/hooks.js'
 
 function App() {
-  const { matched } = useSocketContext()
+  const { matched } = useGameStateContext()
   
   return (
     <>

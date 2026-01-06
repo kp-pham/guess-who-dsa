@@ -8,6 +8,7 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
                'Binary Search Trees', 'Linked Lists', 'Level Order Traversal', 'Graphs']
 
 const initialState = {
+  matched: false,
   eliminated: new Set(),
   incorrectGuess: false,
   disconnected: false,
@@ -18,6 +19,12 @@ const initialState = {
 
 function gameReducer(state, action) {
   switch(action.type) {
+    case 'MATCHED':
+      return { ...state, matched: true }
+
+    case 'REJOIN':
+      return { ...state, matched: false }
+
     case 'OPPONENT_DISCONNECTED':
       return { ...state, disconnected: true }
 
@@ -53,7 +60,7 @@ function gameReducer(state, action) {
 }
 
 function GameStateProvider({ children }) {
-  const { socket, room } = useSocketContext()
+  const { socket, room, setRoom } = useSocketContext()
   const [state, dispatch] = useReducer(gameReducer, initialState)
 
   const selectedCard = useMemo(() => {
@@ -61,7 +68,25 @@ function GameStateProvider({ children }) {
     return cards[index]
   }, [])
 
+  useEffect(() => {
+    function handleMatched(room) {
+      setRoom(room)
+      dispatch({ type: 'MATCHED' })
+    }
   
+    socket.on('matched', handleMatched)
+    return () => socket.off('matched', handleMatched)
+  }, [socket, room, setRoom])
+  
+  useEffect(() => {
+    function handleRejoin() {
+      setRoom(null)
+      dispatch({ type: 'REJOIN' })
+    }
+  
+    socket.on('leave_game', handleRejoin)
+    return () => socket.off('leave_game', handleRejoin)
+  }, [socket, room, setRoom])
 
   useEffect(() => {
     socket.emit('ready', { selected: selectedCard, room: room })
