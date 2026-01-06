@@ -1,3 +1,3 @@
-import SocketProvider from './SocketContext.jsx'
+import SocketProvider from './SocketProvider.jsx'
 
 export default SocketProvider 
