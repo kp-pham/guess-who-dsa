@@ -15,8 +15,6 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
   const [incorrectGuess, setIncorrectGuess] = useState(false)
-  const [reveal, setReveal] = useState(null)
-  const [winner, setWinner] = useState(false)
   const { socket, room } = useSocketContext()
   const { disconnected, gameOver, dispatch } = useGameStateContext()
 
@@ -27,18 +25,6 @@ function Gameboard() {
       return current
     })
   }
-
-  useEffect(() => {
-    function handleGameWon(payload) {
-      setReveal(payload)
-      setGameOver(true)
-      setWinner(true)
-    }
-
-    socket.on('game_won', handleGameWon)
-    return () => socket.off('game_won', handleGameWon)
-  }, [socket])
-
   
 
   useEffect(() => {
@@ -71,8 +57,6 @@ function Gameboard() {
       </DisconnectModal>
       <GameOverModal
         gameOver={gameOver}
-        reveal={reveal}
-        winner={winner}
         onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </GameOverModal>
       <IncorrectGuessModal

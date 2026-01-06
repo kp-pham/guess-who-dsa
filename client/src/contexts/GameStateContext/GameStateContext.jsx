@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useReducer } from 'react'
+import { useEffect, useMemo, useReducer } from 'react'
 import { GameStateContext } from './useGameStateContext.js'
 import { useSocketContext } from '../hooks.js'
 
@@ -9,7 +9,9 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
 
 const initialState = {
     disconnected: false,
-    gameOver: false
+    gameOver: false,
+    reveal: null,
+    winner: false,
 }
 
 function gameReducer(state, action) {
@@ -17,8 +19,11 @@ function gameReducer(state, action) {
     case 'OPPONENT_DISCONNECTED':
       return { ...state, disconnected: true }
 
-    case 'GAME_OVER':
-      return { ...state, gameOver: true }
+    case 'GAME_WON':
+      return { ...state, gameOver: true, reveal: action.payload, winner: true }
+
+    case 'GAME_LOST':
+      return { ...state, gameOver: true, reveal: action.payload, winner: false }
 
     case 'RESET_GAME_STATE':
       return { ...initialState }
@@ -49,6 +54,25 @@ function GameStateProvider({ children }) {
     socket.on('opponent_disconnected', handleDisconnect)
     return () => socket.off('opponent_disconnected', handleDisconnect)
   }, [socket])
+
+  useEffect(() => {
+    function handleGameWon(payload) {
+      dispatch({ type: 'GAME_WON', payload: payload })
+    }
+
+    socket.on('game_won', handleGameWon)
+    return () => socket.off('game_won', handleGameWon)
+  }, [socket])
+
+  useEffect(() => {
+    function handleGameLost(payload) {
+      dispatch({ type: 'GAME_LOST', payload: payload })
+    }
+
+    socket.on('game_lost', handleGameLost)
+    return () => socket.off('game_lost', handleGameLost)
+  }, [socket])
+
   
   return (
     <GameStateContext.Provider value={{ selectedCard, ...state, dispatch }}>
