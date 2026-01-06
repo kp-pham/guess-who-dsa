@@ -43,7 +43,7 @@ function ControlPanel() {
       <GuessModal
         open={open}
         onClose={() => setOpen(false)}
-        onGuess={() => dispatch({ type: 'END_TURN', payload: false })}>
+        onGuess={() => dispatch({ type: 'END_TURN' })}>
       </GuessModal>
     </section>
   )

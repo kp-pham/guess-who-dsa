@@ -30,10 +30,10 @@ function gameReducer(state, action) {
       return { ...state, turn: action.payload }
 
     case 'START_TURN':
-      return { ...state, turn: action.payload }
+      return { ...state, turn: true }
 
     case 'END_TURN':
-      return { ...state, turn: action.payload }
+      return { ...state, turn: false }
 
     case 'OPPONENT_DISCONNECTED':
       return { ...state, disconnected: true }
@@ -114,7 +114,7 @@ function GameStateProvider({ children }) {
 
   useEffect(() => {
     function startTurn() {
-      dispatch({ type: 'START_TURN', payload: true })
+      dispatch({ type: 'START_TURN' })
     }
   
     socket.on('end_turn', startTurn)
