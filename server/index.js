@@ -1,6 +1,6 @@
 import express from 'express'
 import { Server } from 'socket.io'
-import path from 'path'
+import path, { resolve } from 'path'
 import { fileURLToPath } from 'url'
 import crypto from 'crypto'
 import fs from 'fs'
@@ -24,6 +24,7 @@ const io = new Server(expressServer, {
   }
 })
 
+const DELAY = 300;
 const queue = []
 const rooms = {}
 
@@ -33,7 +34,6 @@ io.on('connection', socket => {
 
   socket.on('ready', data => {
     const { selected, room } = data
-
     if (!roomExists(room)) return
     if (!roomRegistered(room)) return
     if (!playerInRoom(room, socket.id)) return
@@ -125,7 +125,7 @@ io.on('connection', socket => {
   })
 })
 
-function match() {
+async function match() {
   while (queue.length >= 2) {
     const player1 = io.sockets.sockets.get(queue.shift())
     const player2 = io.sockets.sockets.get(queue.shift())
@@ -133,6 +133,7 @@ function match() {
     if (!player1 || !player2)
       return
 
+    await sleep(DELAY);
     startGame(player1, player2)
   }
 }
@@ -152,6 +153,10 @@ function startGame(player1, player2) {
   }
 
   io.to(room).emit('matched', room)
+}
+
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 function setSelected(room, id, selected) {
