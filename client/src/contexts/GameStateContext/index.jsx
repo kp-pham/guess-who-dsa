@@ -1,3 +1,3 @@
-import GameStateProvider from './GameStateContext.jsx'
+import GameStateProvider from './GameStateProvider.jsx'
 
 export default GameStateProvider
