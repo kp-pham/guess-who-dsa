@@ -7,7 +7,7 @@ function ControlPanel({ remaining }) {
   const [open, setOpen] = useState(false)
   const [turn, setTurn] = useState(false)
   const { socket, room } = useSocketContext()
-  const { selected } = useGameStateContext()
+  const { selectedCard } = useGameStateContext()
 
   useEffect(() => {
     function handleStartGame(startingPlayer) {
@@ -34,7 +34,7 @@ function ControlPanel({ remaining }) {
   
   return (
     <section id="control-panel">
-      <div id="selected">{selected}</div>
+      <div id="selected">{selectedCard}</div>
       <div id="controls">
         <button 
           id="guess"

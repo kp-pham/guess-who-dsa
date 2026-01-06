@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSocketContext } from '../contexts/hooks.js'
+import { useSocketContext, useGameStateContext } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import DisconnectModal from './DisconnectModal.jsx'
@@ -14,12 +14,11 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
 
 function Gameboard() {
   const [eliminated, setEliminated] = useState(new Set())
-  const [disconnected, setDisconnected] = useState(false)
   const [incorrectGuess, setIncorrectGuess] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
   const [reveal, setReveal] = useState(null)
   const [winner, setWinner] = useState(false)
   const { socket, room } = useSocketContext()
+  const { disconnected, gameOver, dispatch } = useGameStateContext()
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -40,16 +39,7 @@ function Gameboard() {
     return () => socket.off('game_won', handleGameWon)
   }, [socket])
 
-  useEffect(() => {
-    function handleGameLost(payload) {
-      setReveal(payload)
-      setGameOver(true)
-      setWinner(false)
-    }
-
-    socket.on('game_lost', handleGameLost)
-    return () => socket.off('game_lost', handleGameLost)
-  }, [socket])
+  
 
   useEffect(() => {
     function handleIncorrectGuess(guess) {
@@ -65,15 +55,6 @@ function Gameboard() {
     return () => socket.off('incorrect_guess', handleIncorrectGuess)
   }, [socket])
 
-  useEffect(() => {
-    function handleDisconnect() {
-      setDisconnected(true)
-    }
-
-    socket.on('opponent_disconnected', handleDisconnect)
-    return () => socket.off('opponent_disconnected', handleDisconnect)
-  }, [socket])
-
   return (
     <section id="gameboard">
       <CardGrid 
@@ -86,13 +67,13 @@ function Gameboard() {
       </ControlPanel>
       <DisconnectModal
         disconnected={disconnected}
-        onClose={() => setDisconnected(false)}>
+        onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </DisconnectModal>
       <GameOverModal
         gameOver={gameOver}
         reveal={reveal}
         winner={winner}
-        onClose={() => setGameOver(false)}>
+        onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </GameOverModal>
       <IncorrectGuessModal
         incorrectGuess={incorrectGuess}
