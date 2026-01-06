@@ -12,8 +12,15 @@ Guess Who: Data Structures and Algorithms provides a unique twist on the traditi
 - Matchmaking between players with lobby queue and room management
 - Requeue players when opponent disconnects in the middle of game session
 - Server serves as ultimate authority for game state and validates player actions
+- Synchronization between game state and user interface with  
 - Cloud deployment of monorepo architecture on Koyeb
 - Containerization with Dockerfile for hosting frontend and backend on the same server
+
+## Improvements
+
+Resolved problem in which user interface becomes desynchronized from game state when socket listeners have not been mounted before communication from the server is received.
+- Implemented ```GameStateProvider``` with reducers to manage game state and allow components to consume game state information received from the server
+- Introduced latency for matchmaking to ensure components on the client side are rendered before performing handshake with the server 
 
 ## Installation
 
@@ -78,7 +85,3 @@ Run backend production build:
 cd ../server
 npm run start
 ```
-
-## Known Issues
-
-The user interface becomes desynchronized when socket listeners have not been mounted before communication from the server is received because the components on which the listeners are mounted have not been rendered. Players can rejoin matchmaking to resolve the problem.
