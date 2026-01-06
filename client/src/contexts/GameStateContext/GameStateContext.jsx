@@ -8,12 +8,12 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
                'Binary Search Trees', 'Linked Lists', 'Level Order Traversal', 'Graphs']
 
 const initialState = {
-    eliminated: new Set(),
-    incorrectGuess: false,
-    disconnected: false,
-    gameOver: false,
-    reveal: null,
-    winner: false,
+  eliminated: new Set(),
+  incorrectGuess: false,
+  disconnected: false,
+  gameOver: false,
+  reveal: null,
+  winner: false,
 }
 
 function gameReducer(state, action) {
@@ -30,7 +30,7 @@ function gameReducer(state, action) {
     
     case 'INCORRECT_GUESS': {
       const current = new Set(state.eliminated)
-      current.add(action.guess)
+      current.add(action.payload)
 
       return { ...state, eliminated: current, incorrectGuess: true }
     }
@@ -61,6 +61,8 @@ function GameStateProvider({ children }) {
     return cards[index]
   }, [])
 
+  
+
   useEffect(() => {
     socket.emit('ready', { selected: selectedCard, room: room })
   }, [socket, selectedCard, room])
@@ -76,7 +78,7 @@ function GameStateProvider({ children }) {
 
   useEffect(() => {
     function handleIncorrectGuess(guess) {
-      dispatch({ type: 'INCORRECT_GUESS', guess: guess })
+      dispatch({ type: 'INCORRECT_GUESS', payload: guess })
     }
     
     socket.on('incorrect_guess', handleIncorrectGuess)
