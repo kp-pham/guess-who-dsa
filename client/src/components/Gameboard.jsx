@@ -13,10 +13,8 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
                'Binary Search Trees', 'Linked Lists', 'Level Order Traversal', 'Graphs']
 
 function Gameboard() {
-  const [eliminated, setEliminated] = useState(new Set())
-  const [incorrectGuess, setIncorrectGuess] = useState(false)
   const { socket, room } = useSocketContext()
-  const { disconnected, gameOver, dispatch } = useGameStateContext()
+  const { eliminated, disconnected, gameOver, incorrectGuess, dispatch } = useGameStateContext()
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -25,29 +23,10 @@ function Gameboard() {
       return current
     })
   }
-  
-
-  useEffect(() => {
-    function handleIncorrectGuess(guess) {
-      setEliminated(previous => {
-        const current = new Set(previous)
-        current.has(guess) ? current.delete(guess) : current.add(guess)
-        return current
-      })
-      setIncorrectGuess(true)
-    }
-    
-    socket.on('incorrect_guess', handleIncorrectGuess)
-    return () => socket.off('incorrect_guess', handleIncorrectGuess)
-  }, [socket])
 
   return (
     <section id="gameboard">
-      <CardGrid 
-        cards={cards} 
-        eliminated={eliminated} 
-        onCardClick={handleClick}>
-      </CardGrid>
+      {/* <CardGrid></CardGrid> */}
       <ControlPanel
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
@@ -60,8 +39,7 @@ function Gameboard() {
         onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </GameOverModal>
       <IncorrectGuessModal
-        incorrectGuess={incorrectGuess}
-        onClose={() => setIncorrectGuess(false)}>
+        onClose={() => dispatch({ type: 'ACK_INCORRECT_GUESS'})}>
       </IncorrectGuessModal>
     </section>
   )
