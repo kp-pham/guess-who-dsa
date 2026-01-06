@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom'
-import { useGameStateContext } from '../contexts/hooks.js'
+import { useGameState } from '../contexts/hooks.js'
 import '../styles/IncorrectGuessModal.css'
 
 function IncorrectGuessModal({ onClose }) {
-  const { incorrectGuess } = useGameStateContext()
+  const { incorrectGuess } = useGameState()
 
   if (!incorrectGuess) return null
 

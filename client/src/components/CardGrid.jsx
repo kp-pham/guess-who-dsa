@@ -1,8 +1,8 @@
-import { useGameStateContext } from '../contexts/hooks.js'
+import { useGameState } from '../contexts/hooks.js'
 import '../styles/CardGrid.css'
 
 function CardGrid() {
-  const { cards, eliminated, dispatch } = useGameStateContext() 
+  const { cards, eliminated, dispatch } = useGameState() 
 
   return (
     <section id="card-grid">

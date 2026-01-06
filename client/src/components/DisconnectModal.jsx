@@ -1,10 +1,10 @@
 import { createPortal } from 'react-dom'
-import { useSocketContext, useGameStateContext } from '../contexts/hooks.js'
+import { useSocketContext, useGameState } from '../contexts/hooks.js'
 import '../styles/DisconnectModal.css'
 
 function DisconnectModal({ onClose }) { 
   const { socket } = useSocketContext()
-  const { disconnected } = useGameStateContext()
+  const { disconnected } = useGameState()
 
   if (!disconnected) return null
 

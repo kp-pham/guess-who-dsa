@@ -1,4 +1,4 @@
-import { useGameStateContext } from '../contexts/hooks.js'
+import { useGameState } from '../contexts/hooks.js'
 import CardGrid from './CardGrid.jsx'
 import ControlPanel from './ControlPanel.jsx'
 import DisconnectModal from './DisconnectModal.jsx'
@@ -7,7 +7,7 @@ import IncorrectGuessModal from './IncorrectGuessModal.jsx'
 import '../styles/Gameboard.css'
 
 function Gameboard() {
-  const { dispatch } = useGameStateContext()
+  const { dispatch } = useGameState()
 
   return (
     <section id="gameboard">

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useGameStateContext, useSocketContext } from '../contexts/hooks.js'
+import { useGameState, useSocketContext } from '../contexts/hooks.js'
 import '../styles/GuessModal.css'
 
 function GuessModal({ open, onClose, onGuess }) {
   const [guess, setGuess] = useState('')
   const { socket, room } = useSocketContext()
-  const { cards, eliminated } = useGameStateContext()
+  const { cards, eliminated } = useGameState()
 
   const remaining = cards.filter(card => !eliminated.has(card))
 

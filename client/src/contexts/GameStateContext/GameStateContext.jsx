@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from 'react'
-import { GameStateContext } from './useGameStateContext.js'
+import { GameStateContext } from './useGameState.js'
 import { useSocketContext } from '../hooks.js'
 
 const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Traversal', 'Preorder Traversal', 'Selection Sort', 
