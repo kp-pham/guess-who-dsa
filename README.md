@@ -19,8 +19,8 @@ Guess Who: Data Structures and Algorithms provides a unique twist on the traditi
 ## Improvements
 
 Resolved problem in which user interface becomes desynchronized from game state when socket listeners have not been mounted before communication from the server is received.
-- Implemented ```GameStateProvider``` with reducers to manage game state and allow components to consume game state information received from the server
-- Introduced latency for matchmaking to ensure components on the client side are rendered before performing handshake with the server 
+- Implemented ```GameStateProvider``` with reducers to manage game state and allow components to consume game state information received from the server.
+- Introduced latency for matchmaking to ensure components on the client side are rendered before performing handshake with the server to receive game state information. 
 
 ## Installation
 
