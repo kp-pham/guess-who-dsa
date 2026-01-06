@@ -13,8 +13,7 @@ const cards = ['Quicksort', 'Directed Acyclic Graph', 'Arrays', 'Postorder Trave
                'Binary Search Trees', 'Linked Lists', 'Level Order Traversal', 'Graphs']
 
 function Gameboard() {
-  const { socket, room } = useSocketContext()
-  const { eliminated, disconnected, gameOver, incorrectGuess, dispatch } = useGameStateContext()
+  const { eliminated, dispatch } = useGameStateContext()
 
   function handleClick(card) {
     setEliminated(previous => {
@@ -31,11 +30,9 @@ function Gameboard() {
         remaining={cards.filter(card => !eliminated.has(card))}>
       </ControlPanel>
       <DisconnectModal
-        disconnected={disconnected}
         onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </DisconnectModal>
       <GameOverModal
-        gameOver={gameOver}
         onClose={() => dispatch({ type: 'RESET_GAME_STATE' })}>
       </GameOverModal>
       <IncorrectGuessModal

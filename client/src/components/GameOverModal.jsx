@@ -2,9 +2,9 @@ import { createPortal } from 'react-dom'
 import { useSocketContext, useGameStateContext } from '../contexts/hooks.js'
 import '../styles/GameOverModal.css'
 
-function GameOverModal({ gameOver, onClose }) {
+function GameOverModal({ onClose }) {
   const { socket } = useSocketContext()
-  const { winner, reveal } = useGameStateContext()
+  const { gameOver, winner, reveal } = useGameStateContext()
 
   if (!gameOver) return null
 
